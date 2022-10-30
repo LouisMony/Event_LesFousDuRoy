@@ -18,7 +18,6 @@
         <EventItem />
       </div>
     </main>
-    <Navbar />
   </div>
 </template>
 
@@ -30,7 +29,6 @@ import EventItem from '@/components/EventItem.vue'
 export default {
   name: 'HomeView',
   components: {
-    Navbar,
     EventItem,
   },
   data(){

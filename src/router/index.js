@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
+import ProfilView from '../views/ProfilView.vue'
 
 
 Vue.use(VueRouter)
@@ -16,6 +17,11 @@ const routes = [
     path: '/detail',
     name: 'detail',
     component: DetailView
+  },
+  {
+    path: '/my-profil',
+    name: 'my-profil',
+    component: ProfilView
   }
 ]
 
