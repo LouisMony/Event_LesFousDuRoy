@@ -23,7 +23,6 @@
 
 <script>
 
-import Navbar from '@/components/Navbar.vue'
 import EventItem from '@/components/EventItem.vue'
 
 export default {
