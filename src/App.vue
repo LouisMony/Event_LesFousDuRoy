@@ -13,7 +13,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   margin: 0;
-  padding: 25px;
+  padding: 0px;
   background-color: $bg_black;
   font-family: Poppins, Helvetica, Arial, sans-serif;
 

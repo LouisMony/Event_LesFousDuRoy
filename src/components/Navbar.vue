@@ -75,10 +75,22 @@ export default {
       justify-content: center;
       gap: 10px;
       transition: all 200ms linear;
+
+      .svg{
+        stroke: $scnd_text
+      }
+      
+      span{
+        display: none;
+      }
     }
 
     .active{
       color: $orange;
+      
+      span{
+        display: block;
+      }
 
       .svg{
         stroke: $orange
@@ -87,7 +99,4 @@ export default {
     }
   }
 }
-
-
-
 </style>

@@ -60,76 +60,81 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/style/_variables.scss";
 
-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+.home{
+  box-sizing: border-box;
+  padding: 25px 25px 0 25px;
 
-  input{
-    color: $white;
-    height: 55px;
-    outline: none;
-    border: none;
-    font-family: Poppins, Helvetica, Arial, sans-serif;
-    border-radius: 10px;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0 20px;
-    background-color: $bg_black_light;
-
-    &:focus{
-      border: 1px solid rgb(130, 130, 130);
-    }
-  }
-}
-
-main{
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 179px);
-
-  ul{
-    margin:25px 0;
-    padding: 0;
-    list-style-type: none;
-    width: 100%;
+  header{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-between;
+    gap: 20px;
 
-    li{
-      position: relative;
-      padding: 0;
-      margin: 0;
-    }
+    input{
+      color: $white;
+      height: 55px;
+      outline: none;
+      border: none;
+      font-family: Poppins, Helvetica, Arial, sans-serif;
+      border-radius: 10px;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 20px;
+      background-color: $bg_black_light;
 
-    .active{
-      color: $orange;
-      font-weight: 600;
-
-      &:before{
-        content: '';
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        border-radius: 5px;
-        background: $orange;
-        translate: transform(-50%, -50%);
-        left: 50%;
-        bottom: -6px;
+      &:focus{
+        border: 1px solid rgb(130, 130, 130);
       }
     }
   }
 
-  .event_list{
-    flex: 1 1 auto;
-    overflow-y: auto;
-    min-height: 0px; 
+  main{
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    height: calc(100vh - 179px);
+
+    ul{
+      margin:25px 0;
+      padding: 0;
+      list-style-type: none;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+
+      li{
+        position: relative;
+        padding: 0;
+        margin: 0;
+      }
+
+      .active{
+        color: $orange;
+        font-weight: 600;
+
+        &:before{
+          content: '';
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          border-radius: 5px;
+          background: $orange;
+          translate: transform(-50%, -50%);
+          left: 50%;
+          bottom: -6px;
+        }
+      }
+    }
+
+    .event_list{
+      flex: 1 1 auto;
+      overflow-y: auto;
+      min-height: 0px; 
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="event_item">
+  <div class="event_item" @click="$router.push('/detail')">
     <div class="event_item_left">
         <div class="image"></div>
         <p>
