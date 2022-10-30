@@ -8,6 +8,7 @@
 @import "@/assets/style/_variables.scss";
 
 body {
+  overflow: hidden;
   height: 100vh;
   width: 100%;
   box-sizing: border-box;

@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
    <ul>
-      <li id="nav_a" class="nav_li active" v-on:click="toogleActive('nav_a')">
+      <li class="nav_li active" v-on:click="toogleActive('nav_a')">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path class="svg" d="M4 29.3333H28" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path class="svg" d="M7.46663 11.1733H5.33333C4.6 11.1733 4 11.7733 4 12.5067V24C4 24.7333 4.6 25.3333 5.33333 25.3333H7.46663C8.19997 25.3333 8.79997 24.7333 8.79997 24V12.5067C8.79997 11.7733 8.19997 11.1733 7.46663 11.1733Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -10,7 +10,7 @@
         </svg>
         <span>Events</span>
       </li>
-      <li id="nav_b" class="nav_li" v-on:click="toogleActive('nav_b')">
+      <li class="nav_li" v-on:click="toogleActive('nav_b')">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path class="svg" d="M16 16C19.6819 16 22.6667 13.0152 22.6667 9.33334C22.6667 5.65144 19.6819 2.66667 16 2.66667C12.3181 2.66667 9.33337 5.65144 9.33337 9.33334C9.33337 13.0152 12.3181 16 16 16Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path class="svg" d="M27.4533 29.3333C27.4533 24.1733 22.32 20 16 20C9.67996 20 4.54663 24.1733 4.54663 29.3333" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
