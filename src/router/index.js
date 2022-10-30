@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DetailView from '../views/DetailView.vue'
 import ProfilView from '../views/ProfilView.vue'
+import Signin from '../views/SigninView.vue'
+import Signup from '../views/SignupView.vue'
 
 
 Vue.use(VueRouter)
@@ -22,6 +24,16 @@ const routes = [
     path: '/my-profil',
     name: 'my-profil',
     component: ProfilView
+  },
+  {
+    path: '/me-connecter',
+    name: 'me-connecter',
+    component: Signin
+  },
+  {
+    path: '/creer-un-compte',
+    name: 'creer-un-compte',
+    component: Signup
   }
 ]
 

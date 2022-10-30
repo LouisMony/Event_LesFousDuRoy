@@ -29,13 +29,7 @@ export default {
       active_id : "nav_a"
     }
   },
-  mounted() {
 
-    if(this.$route.name === 'home' || this.$route.name === 'my-profil'){
-      console.log('est good');
-    }
-
-  },
   methods:{
     toogleActive(id){
       if(id !== this.active_id){

@@ -49,9 +49,10 @@ export default {
     height: calc(100vh - 97px);
 
     .photo_profil{
+        max-width: 200px;
         width: 40%;
         aspect-ratio: 1/1;
-        margin: 45px auto 25px;
+        margin: 25px auto 25px;
         border-radius: 30px;
         background-image: url("@/assets/img/bg_username.png");
         background-position: center;
