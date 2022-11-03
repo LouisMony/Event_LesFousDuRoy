@@ -1,12 +1,17 @@
 <template>
   <div class="profil">
-    <div>
+    <ModalProfil v-if="activemodal"/>
+    <img class="option"  @click="activemodal = true" src="@/assets/img/option.svg" alt="Option de profil">
+    <div class="profil_top">
         <div class="photo_profil"></div>
-        <h1>Username</h1>
-        <hr>
-        <p>Mes prochains évènements :</p>
+        <div class="profil_info">
+          <h1>Username</h1>
+          <span class="mail">Louis.mony@gmail.com</span><br>
+          
+        </div>
     </div>
-    
+    <hr>
+    <p>Mes prochains évènements :</p>
     <div class="event_list">
         <EventItem />
         <EventItem />
@@ -23,14 +28,17 @@
 <script>
 
 import EventItem from '@/components/EventItem.vue'
+import ModalProfil from '@/components/ModalProfil.vue'
 
 export default {
   name: 'ProfilView',
   components: {
-    EventItem
+    EventItem,
+    ModalProfil
   },
   data(){
     return {
+      activemodal: false,
     }
   },
   methods:{
@@ -48,42 +56,67 @@ export default {
     flex-direction: column;
     height: calc(100vh - 75px);
 
-    .photo_profil{
-        mask: paint(squircle);
-        --squircle-radius: 30px;
-	      --squircle-smooth: 0.4;
-        max-width: 200px;
-        width: 40%;
-        aspect-ratio: 1/1;
-        margin: 25px auto 25px;
+    .option{
+      position: absolute;
+      right: 15px;
+      top: 25px;
+    }
 
-        background-image: url("@/assets/img/bg_username.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.65));
+    .profil_top{
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+
+      .photo_profil{
+          mask: paint(squircle);
+          --squircle-radius: 30px;
+          --squircle-smooth: 0.4;
+          max-width: 200px;
+          width: 40%;
+          aspect-ratio: 1/1;
+          margin: 0;
+
+          background-image: url("@/assets/img/bg_username.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.65));
+      }
+
+      .profil_info{
+        h1{
+            font-weight: 600;
+            font-size: 32px;
+            margin: 0 ;
+        }
+
+        span{
+          color: $scnd_text;
+        }
+
+        button{
+
+        }
+      }
     }
-    h1{
-        font-weight: 600;
-        font-size: 32px;
-        margin: 0 0 25px 0;
-        text-align: center;
-    }
+
     hr{
-        border: 1px solid $bg_black_light
+      border: 1px solid $bg_black_light;
+      width:100%;
     }
 
     p{
-        font-weight: 500;
-        font-size: 16px;}
+      font-weight: 500;
+      font-size: 16px;}
     }
-
-      .event_list{
-        flex: 1 1 auto;
-        overflow-y: auto;
-        min-height: 0px; 
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
+    
+    .event_list{
+      flex: 1 1 auto;
+      overflow-y: auto;
+      min-height: 0px; 
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
     }
 </style>
