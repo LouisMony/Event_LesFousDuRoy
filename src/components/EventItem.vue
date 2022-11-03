@@ -23,6 +23,7 @@ export default {
       
     }
   },
+  
   methods:{
   }
 }
@@ -49,13 +50,16 @@ export default {
 
         .image{
           height: 80px;
-          background: blue;
           aspect-ratio: 1/1; 
           border-radius: 20px; 
           background-image: url("@/assets/img/bg_tournoi.png");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
+
+          mask: paint(squircle);
+          --squircle-radius: 20px;
+	        --squircle-smooth: 0.5;
         }
 
         p{

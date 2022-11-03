@@ -115,6 +115,9 @@
     }
     .detail_content_bottom{
       button{
+        mask: paint(squircle);
+        --squircle-radius: 20px;
+	      --squircle-smooth: 0.5;
         width: 100%;
         height: 65px;
         font-family: Poppins, Helvetica, Arial, sans-serif;
