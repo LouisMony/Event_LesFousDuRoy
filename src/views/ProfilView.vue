@@ -43,10 +43,10 @@ export default {
 
 .profil{
     box-sizing: border-box;
-    padding: 25px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 97px);
+    height: calc(100vh - 75px);
 
     .photo_profil{
         max-width: 200px;
@@ -76,11 +76,11 @@ export default {
     }
 
       .event_list{
-      flex: 1 1 auto;
-      overflow-y: auto;
-      min-height: 0px; 
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        min-height: 0px; 
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
     }
 </style>

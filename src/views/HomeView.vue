@@ -59,7 +59,7 @@ export default {
 
 .home{
   box-sizing: border-box;
-  padding: 25px 25px 0 25px;
+  padding: 15px 15px 0 15px;
 
   header{
     display: flex;

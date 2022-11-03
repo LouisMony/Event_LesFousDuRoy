@@ -51,7 +51,7 @@ export default {
 .navbar{
   border-top: 2px solid $bg_black_light;
   background: $bg_black;
-  height: 95px;
+  height: 75px;
   display: flex;
   align-items: center;
   position: absolute;

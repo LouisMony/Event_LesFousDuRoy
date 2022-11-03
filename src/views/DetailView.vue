@@ -62,7 +62,7 @@
   .detail_content{
     width: 100%;
     box-sizing: border-box;
-    padding: 25px;
+    padding: 15px;
     height: 100%;
     display: flex;
     flex-direction: column;
