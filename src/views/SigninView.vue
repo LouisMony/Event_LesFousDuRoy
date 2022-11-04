@@ -39,7 +39,7 @@ export default {
 
 .signin{
     box-sizing: border-box;
-    padding: 25px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -54,7 +54,7 @@ export default {
     }
 
     img{
-        width: 20%;
+        width: 15%;
         transform: rotate(0deg) translate(-50%, -50%);
         animation: rotating 10s linear infinite;
     }
@@ -80,7 +80,7 @@ export default {
         }
         label{
             font-weight: 400;
-            font-size: 16px;
+            font-size: 14px;
             color:$scnd_text;
             margin-bottom: 10px;
         }
@@ -92,9 +92,9 @@ export default {
             outline: none;
             border: 1px solid #393939;
             width: 100%;
-            height: 65px;
-            margin:10px 0 25px 0;
-            border-radius: 10px;
+            height: 55px;
+            margin:10px 0 20px 0;
+            border-radius: 5px;
             color: $white;
             padding: 0 10px;
 
@@ -105,20 +105,21 @@ export default {
 
         button{
             width: 100%;
-            height: 65px;
+            height: 55px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
             background-color: $orange;
             color: white;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 16px;
             border: none;
             outline:none;
-            border-radius: 10px;
+            border-radius: 5px;
             margin: 25px 0 25px 0;
         }
 
         .redirect{
-            color: $orange;
+            color:$scnd_text;
+            font-size: 14px;
         }
     }
 }

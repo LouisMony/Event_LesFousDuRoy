@@ -2,6 +2,7 @@
   <div class="modalprofil">
     <div class="modalprofil_bloc">
         <button>Modifier mon profil</button>
+        <button>Modifier ma photo profil</button>
         <button @click="$router.replace({ path: '/me-connecter' })">Me déconnecter</button>
     </div>
   </div>
@@ -35,7 +36,8 @@ export default {
     position: absolute;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +46,6 @@ export default {
         padding: 40px 0;
         height: fit-content;
         width: 80%;
-        background: $bg_black;
         border-radius: 10px;
         text-align: center;
         font-weight: 500;
@@ -56,22 +57,16 @@ export default {
         gap: 30px;
 
         button{
-            width: calc(100% - 40px);
-            height: 65px;
+            width: calc(100% - 100px);
+            height: 45px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $orange;
+            background-color: transparent;
             color: white;
             font-weight: 500;
             font-size: 16px;
             border: none;
             outline:none;
             border-radius: 10px;
-
-            &:nth-child(2){
-                background:  $bg_black;
-                border: 1px solid $orange;
-                color: $orange;
-            }
         }
     }
 }
