@@ -1,7 +1,10 @@
 <template>
   <div class="profil">
-    <ModalProfil v-if="activemodal"/>
-    <img class="option"  @click="activemodal = true" src="@/assets/img/option.svg" alt="Option de profil">
+    <transition name="fade" mode="out-in">
+        <ModalProfil v-if="activemodal"/>
+    </transition>
+    <img v-if="!activemodal" class="option"  @click="activemodal = true" src="@/assets/img/option.svg" alt="Option de profil" />
+    <img v-if="activemodal" class="close"  @click="activemodal = false" src="@/assets/img/close.svg" alt="Fermer" />
     <div class="profil_top">
         <div class="photo_profil"></div>
         <div class="profil_info">
@@ -49,6 +52,15 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/style/_variables.scss";
 
+.fade-enter-active, .fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: ease;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
 .profil{
     box-sizing: border-box;
     padding: 15px;
@@ -57,6 +69,12 @@ export default {
     height: calc(100vh - 75px);
 
     .option{
+      position: absolute;
+      right: 15px;
+      top: 25px;
+    }
+    .close{
+      z-index: 1001;
       position: absolute;
       right: 15px;
       top: 25px;

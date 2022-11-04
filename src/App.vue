@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="fade" mode="out-in">
+    <transition name="slide" mode="out-in">
       <router-view/>
     </transition>
     <Navbar v-if="this.$route.name === 'home' || this.$route.name === 'my-profil'"/>
@@ -35,16 +35,20 @@ export default {
 <style lang="scss">
 @import "@/assets/style/_variables.scss";
 
-.fade-enter-active,
-.fade-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition-duration: 0.3s;
-  transition-property: opacity;
+  transition-property: all;
   transition-timing-function: ease;
 }
 
-.fade-enter,
-.fade-leave-active {
-  opacity: 0
+.slide-enter{
+  transform: translateX(100vw);
+  opacity: 0;
+}
+.slide-leave-active {
+  transform: translateX(-100vw);
+  opacity: 0;
 }
 
 body {
