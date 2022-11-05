@@ -24,19 +24,6 @@
             <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
             <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
         </div>
-        <div class="photo_list">
-            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
-            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
-            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
-            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
-        </div>
-        <div class="photo_list">
-            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
-            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
-            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
-            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
-        </div>
-
         <button>Créer mon compte</button>
 
         <router-link class="redirect" to="me-connecter">Je n'ai pas encore de compte</router-link>
@@ -85,8 +72,6 @@ export default {
 .signup{
     box-sizing: border-box;
     padding: 15px;
-    overflow-y: scroll;
-
     h1{
         margin: 0 auto 25px auto;
         font-weight: 600;
