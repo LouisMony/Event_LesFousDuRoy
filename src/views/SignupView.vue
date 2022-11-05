@@ -17,6 +17,14 @@
         <label for="password_conf">Mot de passe</label><br>
         <input type="password" name="password_conf" /><br>
 
+        <label for="photo_profil">Photo de profil</label><br>
+        <div class="photo_list">
+            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
+            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
+            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
+            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
+        </div>
+
         <button>Créer mon compte</button>
 
         <router-link class="redirect" to="me-connecter">Je n'ai pas encore de compte</router-link>
@@ -35,6 +43,17 @@ export default {
     }
   },
   methods:{
+    SelectPhoto(str){
+        const options = Array.from(document.querySelectorAll('.photo_list_item'))
+        options.forEach(item => {
+            if(item.id === "photo_list_item_"+str){
+                item.classList.add('active')
+            }
+            else{
+                item.classList.remove('active')
+            }
+        })
+    }
   } 
 }
 </script>
@@ -75,6 +94,64 @@ export default {
 
             &:focus{
                 border: 1px solid $light_grey;
+            }
+        }
+
+        .photo_list{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin:10px 0 20px 0;
+
+            .photo_list_item{
+                background-color: $bg_black_light;
+                border: 1px solid #393939;
+                width: 20%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                transition: all 100ms linear;
+                
+
+                &:nth-child(1){
+                    background: url('@/assets/img/photo_profil/Jace.png');
+                    background-position-x: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+                &:nth-child(2){
+                    background: url('@/assets/img/photo_profil/Nissa.png');
+                    background-position-x: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+                &:nth-child(3){
+                    background: url('@/assets/img/photo_profil/Chandra.png');
+                    background-position-x: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+                &:nth-child(4){
+                    background: url('@/assets/img/photo_profil/Liliana.png');
+                    background-position-x: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .active{
+                position: relative;
+                border: 1px solid #FFFFFF;
+                filter: brightness(50%);
+
+                &::before{
+                    content: 'Sélectionné';
+                    font-size: 12px;
+                    position: absolute;
+                    transform: translate(-50%, -50%);
+                    top: 50%;
+                    left: 50%;
+                    border-radius: 50%;
+                }
             }
         }
 
