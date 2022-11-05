@@ -24,6 +24,18 @@
             <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
             <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
         </div>
+        <div class="photo_list">
+            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
+            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
+            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
+            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
+        </div>
+        <div class="photo_list">
+            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
+            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
+            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
+            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
+        </div>
 
         <button>Créer mon compte</button>
 
@@ -40,7 +52,11 @@ export default {
   },
   data(){
     return {
+        images: [],
     }
+  },
+  mounted(){
+    this.countFile(require.context('@/assets/img/photo_profil/', true, /\.png$/))
   },
   methods:{
     SelectPhoto(str){
@@ -53,6 +69,11 @@ export default {
                 item.classList.remove('active')
             }
         })
+    },
+
+    countFile(r){
+        r.keys().forEach(key => (this.images.push({ Url: key })));
+        console.log(this.images)
     }
   } 
 }
@@ -64,6 +85,7 @@ export default {
 .signup{
     box-sizing: border-box;
     padding: 15px;
+    overflow-y: scroll;
 
     h1{
         margin: 0 auto 25px auto;

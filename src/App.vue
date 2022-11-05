@@ -52,7 +52,8 @@ export default {
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
