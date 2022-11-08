@@ -1,36 +1,36 @@
 <template>
   <div class="detail">
-    <div class="detail_bg" @click="$router.go(-1)">
+    <div class="detail_bg" v-bind:style="{ 'background-image': 'url(' + event.fields.Illustration[0].url + ')' }" @click="$router.go(-1)">
       <img src="@/assets/img/arrow_left.svg" alt="Retourner à la page précédente">
     </div>
     <div class="detail_content">
       <div class="detail_content_top">
-        <h1>Draft - Edition #45</h1>
-        <h2>Magic the Gathering</h2>
+        <h1>{{event.fields.Name}}</h1>
+        <h2>{{event.fields.Select}}</h2>
         <hr>
         <div class="detail_content_carac">
           <div class="detail_content_carac_line">
             <div>
               <img src="@/assets/img/calendar.svg" alt="icône de calendrier">
-              <span>06 / 02 / 2023</span>
+              <span>{{event.fields.Date}}</span>
             </div>
             <div>
               <img src="@/assets/img/location.svg" alt="icône de localisation">
-              <span>En boutique</span>
+              <span>{{event.fields.Lieu}}</span>
             </div>
           </div>
           <div class="detail_content_carac_line">
             <div>
               <img src="@/assets/img/clock.svg" alt="icône d'horloge">
-              <span>21:00 - 00:00</span>
+              <span>{{event.fields.Heure}}</span>
             </div>
             <div>
               <img src="@/assets/img/people.svg" alt="icône de groupe">
-              <span>12/16</span>
+              <span>{{event.fields.Nombre_inscriptions}}/{{event.fields.Nombre_Participants}}</span>
             </div>
           </div>
         </div>
-        <p><span>Details :</span><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p><span>Details :</span><br>Prix d'entrée : {{event.fields.Prix}} € <br>{{event.fields.Remarque}}</p>
       </div>
       <div class="detail_content_bottom">
         <button>M’inscrire à cet évènement</button>
@@ -39,6 +39,42 @@
     </div>
   </div>
 </template>
+
+<script>
+import {http} from "../assets/js/http-common.js"
+
+export default {
+  name: 'EventItem',
+  props: {
+    data: Object,
+  },
+  data(){
+    return {
+      page_id : this.$route.params.id,
+      event: []
+    }
+  },
+  mounted(){
+    this.getDetail()
+  },
+  methods:{
+    async getDetail(){
+      var _this = this
+      var id = this.page_id
+      await http.get('Evenements/'+id, {
+          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+      })
+      .then(function (response) {
+        console.log(response.data);
+        _this.event = response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
 
@@ -53,7 +89,6 @@
     box-sizing: border-box;
     padding: 25px;
     height: 50%;
-    background-image: url("@/assets/img/bg_tournoi.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
