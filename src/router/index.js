@@ -5,6 +5,7 @@ import DetailView from '../views/DetailView.vue'
 import ProfilView from '../views/ProfilView.vue'
 import Signin from '../views/SigninView.vue'
 import Signup from '../views/SignupView.vue'
+import UpdatephtotView from '../views/UpdatephtotView.vue'
 
 
 Vue.use(VueRouter)
@@ -34,6 +35,11 @@ const routes = [
     path: '/creer-un-compte',
     name: 'creer-un-compte',
     component: Signup
+  },
+  {
+    path: '/update-pp',
+    name: 'update-pp',
+    component: UpdatephtotView
   }
 ]
 

@@ -12,10 +12,7 @@
       </ul>
 
       <div class="event_list">
-        <EventItem />
-        <EventItem />
-        <EventItem />
-        <EventItem />
+        <EventItem v-for="item in event" :data=item />
       </div>
     </main>
   </div>
@@ -24,6 +21,7 @@
 <script>
 
 import EventItem from '@/components/EventItem.vue'
+import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'HomeView',
@@ -32,8 +30,12 @@ export default {
   },
   data(){
     return {
-      active_id : "li_a"
+      active_id : "li_a",
+      event: []
     }
+  },
+  mounted(){
+    this.GetEvents()
   },
   methods:{
     toogleActive(id){
@@ -49,6 +51,19 @@ export default {
           }
         })
       } 
+    },
+    async GetEvents(){
+      var _this = this
+      await http.get('Evenements', {
+          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+      })
+      .then(function (response) {
+        console.log(response.data);
+        _this.event = response.data.records
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   } 
 }

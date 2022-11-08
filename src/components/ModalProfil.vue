@@ -2,7 +2,7 @@
   <div class="modalprofil">
     <div class="modalprofil_bloc">
         <button>Modifier mon profil</button>
-        <button>Modifier ma photo profil</button>
+        <button @click="$router.replace({ path: '/update-pp' })">Modifier ma photo profil</button>
         <button @click="$router.replace({ path: '/me-connecter' })">Me déconnecter</button>
     </div>
   </div>

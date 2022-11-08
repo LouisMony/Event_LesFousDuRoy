@@ -1,16 +1,17 @@
 <template>
   <div class="event_item" @click="$router.push('/detail')">
     <div class="event_item_left">
-        <div class="image"></div>
+        <div class="image" v-bind:style="{ 'background-image': 'url(' + data.fields.Illustration[0].url + ')' }"></div>
+        
         <p>
-        <span>Draft - Edition #45</span><br>
-        Magic the Gathering<br>
-        6 février 2023
+          <span>{{data.fields.Name}}</span><br>
+          {{data.fields.Select}}<br>
+          {{data.fields.Date}}
         </p>
     </div>
     <div class="event_item_right">
         <img src="@/assets/img/arrow_right.svg" alt="Voir les details du tournois">
-        <p>12 / 16</p>
+        <p>{{data.fields.Nombre_inscriptions}} / {{data.fields.Nombre_Participants}}</p>
     </div>
   </div>
 </template>
@@ -18,6 +19,9 @@
 <script>
 export default {
   name: 'EventItem',
+  props: {
+    data: Object,
+  },
   data(){
     return {
       
@@ -52,7 +56,7 @@ export default {
           height: 80px;
           aspect-ratio: 1/1; 
           border-radius: 20px; 
-          background-image: url("@/assets/img/bg_tournoi.png");
+          //background-image: url("@/assets/img/bg_tournoi.png");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
