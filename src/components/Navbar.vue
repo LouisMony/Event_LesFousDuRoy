@@ -53,7 +53,7 @@ export default {
 
 .navbar{
   border-top: 0px solid $hr;
-  background: $bg_black;
+  //background: $bg_black;
   height: 75px;
   display: flex;
   align-items: center;
@@ -91,14 +91,14 @@ export default {
     }
 
     .active{
-      color: $orange;
+      color: $rouge;
       
       span{
         display: block;
       }
 
       .svg{
-        stroke: $orange
+        stroke: $rouge
       }
 
     }

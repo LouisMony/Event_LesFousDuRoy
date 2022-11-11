@@ -87,7 +87,7 @@ export default {
             .photo_list_item{
                 flex: 1 0 21%;
                 margin-bottom: 15px;
-                background-color: $bg_black_light;
+                //background-color: $bg_black_light;
                 border: 1px solid #393939;
                 width: 20%;
                 aspect-ratio: 1/1;
@@ -119,7 +119,7 @@ export default {
             width: 100%;
             height: 55px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $orange;
+            background-color: $rouge;
             color: white;
             font-weight: 500;
             font-size: 16px;

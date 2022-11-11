@@ -94,7 +94,7 @@ export default {
         p{
             font-weight: 600;
             margin: 0;
-            color: $orange;
+            color: $rouge;
             line-height: 1;
             text-align: right;
 

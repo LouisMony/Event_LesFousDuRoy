@@ -167,7 +167,7 @@ export default {
             width: 100%;
             height: 55px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $orange;
+            background-color: $rouge;
             color: white;
             font-weight: 500;
             font-size: 14px;
