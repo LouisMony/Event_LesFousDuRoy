@@ -110,7 +110,8 @@ export default {
         }
 
         span{
-          color: $scnd_text;
+          color: $fontcolor;
+          font-size: 12px;
         }
 
         button{
@@ -120,7 +121,7 @@ export default {
     }
 
     hr{
-      border: 1px solid $bg_black_light;
+      border: 1px solid $hr;
       width:100%;
     }
 

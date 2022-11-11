@@ -83,7 +83,7 @@ export default {
     gap: 20px;
 
     input{
-      color: $white;
+      color: $fontcolor;
       height: 55px;
       outline: none;
       border: none;
@@ -92,10 +92,10 @@ export default {
       box-sizing: border-box;
       width: 100%;
       padding: 0 20px;
-      background-color: $bg_black_light;
+      background-color: $scnd_bg;
 
       &:focus{
-        border: 1px solid rgb(130, 130, 130);
+        border: 1px solid $focus;
       }
     }
   }
@@ -122,7 +122,7 @@ export default {
       }
 
       .active{
-        color: $orange;
+        color: $rouge;
         font-weight: 600;
 
         &:before{
@@ -131,7 +131,7 @@ export default {
           width: 4px;
           height: 4px;
           border-radius: 5px;
-          background: $orange;
+          background: $rouge;
           translate: transform(-50%, -50%);
           left: 50%;
           bottom: -6px;

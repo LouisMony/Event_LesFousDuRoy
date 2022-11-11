@@ -87,7 +87,7 @@ export default {
 
   .detail_bg{
     box-sizing: border-box;
-    padding: 25px;
+    padding: 15px;
     height: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -108,15 +108,16 @@ export default {
         font-weight: 600;
         font-size: 32px;
         margin: 0;
+        color: $rouge;
       }
       h2{
-        margin: 0 0 25px 0;
+        margin: 0 0 15px 0;
         font-weight: 500;
         font-size: 20px;
-        color:$scnd_text
+        color:$fontcolor
       }
       hr{
-        border: 1px solid $bg_black_light
+        border: 0.5px solid $hr
       }
       .detail_content_carac{
         margin: 25px 0;
@@ -140,11 +141,11 @@ export default {
       }
       p{
         margin: 0;
-        color: $white;
+        color: $fontcolor;
         text-align: justify;
         span{
-          color: $scnd_text;
           font-size: 14px;
+          font-weight: 600;
         }
       }
     }
@@ -153,7 +154,7 @@ export default {
         width: 100%;
         height: 65px;
         font-family: Poppins, Helvetica, Arial, sans-serif;
-        background-color: $orange;
+        background-color: $rouge;
         color: white;
         font-weight: 600;
         font-size: 16px;

@@ -59,11 +59,11 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0px;
-  background-color: $bg_black;
+  background-color: $main_bg;
   font-family: Poppins, Helvetica, Arial, sans-serif;
 
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
-  color: $white;
+  color: $fontcolor;
 }
 </style>

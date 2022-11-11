@@ -73,7 +73,7 @@ export default {
     box-sizing: border-box;
     padding: 15px;
     h1{
-        margin: 0 auto 25px auto;
+        margin: 0 auto 15px auto;
         font-weight: 600;
         font-size: 32px;
     }
@@ -82,25 +82,25 @@ export default {
         label{
             font-weight: 400;
             font-size: 14px;
-            color:$scnd_text;
+            color:$fontcolor;
             margin-bottom: 10px;
         }
 
         input{
             box-sizing: border-box;
             font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $bg_black_light;
+            background-color: $scnd_bg;
             outline: none;
-            border: 1px solid #393939;
+            border: 1px solid $focus;
             width: 100%;
             height: 55px;
             margin:10px 0 20px 0;
             border-radius: 5px;
-            color: $white;
+            color: $fontcolor;
             padding: 0 10px;
 
             &:focus{
-                border: 1px solid $light_grey;
+                border: 1px solid $rouge;
             }
         }
 
@@ -111,8 +111,8 @@ export default {
             margin:10px 0 20px 0;
 
             .photo_list_item{
-                background-color: $bg_black_light;
-                border: 1px solid #393939;
+                background-color: black;
+                border: 1px solid $focus;
                 width: 20%;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
@@ -152,6 +152,7 @@ export default {
 
                 &::before{
                     content: 'Sélectionné';
+                    color: white;
                     font-size: 12px;
                     position: absolute;
                     transform: translate(-50%, -50%);
@@ -178,7 +179,7 @@ export default {
 
         .redirect{
             font-size: 14px;
-            color:$scnd_text;
+            color:$fontcolor;
         }
     }
 }

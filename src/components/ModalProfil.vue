@@ -36,7 +36,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.65);
+    background: #e9eff297;;
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
@@ -61,12 +61,16 @@ export default {
             height: 45px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
             background-color: transparent;
-            color: white;
+            color: $fontcolor;
             font-weight: 500;
             font-size: 16px;
             border: none;
             outline:none;
             border-radius: 10px;
+
+            &:nth-child(3){
+              color: $rouge;
+            }
         }
     }
 }

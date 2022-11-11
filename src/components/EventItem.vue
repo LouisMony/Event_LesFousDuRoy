@@ -11,7 +11,8 @@
     </div>
     <div class="event_item_right">
         <img src="@/assets/img/arrow_right.svg" alt="Voir les details du tournois">
-        <p>{{data.fields.Nombre_inscriptions}} / {{data.fields.Nombre_Participants}}</p>
+        <p>{{data.fields.Nombre_inscriptions}} / {{data.fields.Nombre_Participants}}<br><span>Participants</span></p>
+        
     </div>
   </div>
 </template>
@@ -40,12 +41,13 @@ export default {
 .event_item{
     width: 100%;
     height: 100px;
-    background: $bg_black_light;
+    background: $scnd_bg;
     border-radius: 10px;
     box-sizing: border-box;
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
 
     .event_item_left{
         display: flex;
@@ -56,7 +58,6 @@ export default {
           height: 80px;
           aspect-ratio: 1/1; 
           border-radius: 20px; 
-          //background-image: url("@/assets/img/bg_tournoi.png");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
@@ -70,12 +71,11 @@ export default {
             margin: 0;
             font-weight: 400;
             font-size: 13px;
-            color: $scnd_text;
+            color:$fontcolor;
 
             span{
                 font-weight: 600;
                 font-size: 16px;
-                color:$white;
             }
         }
     }
@@ -87,7 +87,7 @@ export default {
         align-items: end;
 
         img{
-            width: 32px;
+            width: 25px;
             float: right;
         }
 
@@ -95,6 +95,13 @@ export default {
             font-weight: 600;
             margin: 0;
             color: $orange;
+            line-height: 1;
+            text-align: right;
+
+            span{
+              font-weight: 400;
+              font-size: 11px;
+            }
         }
     }
 }
