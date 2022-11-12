@@ -3,7 +3,7 @@
     <div class="modalprofil_bloc">
         <button>Modifier mon profil</button>
         <button @click="$router.replace({ path: '/update-pp' })">Modifier ma photo profil</button>
-        <button @click="$router.replace({ path: '/me-connecter' })">Me déconnecter</button>
+        <button @click="Disconnect()">Me déconnecter</button>
     </div>
   </div>
 </template>
@@ -18,8 +18,9 @@ export default {
   },
 
   methods:{
-    toogleActive(){
-      
+    Disconnect(){
+      localStorage.clear()
+      this.$router.push('/me-connecter')
     }
   }
 }

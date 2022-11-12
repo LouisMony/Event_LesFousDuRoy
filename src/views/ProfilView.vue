@@ -8,8 +8,8 @@
     <div class="profil_top">
         <div class="photo_profil"></div>
         <div class="profil_info">
-          <h1>Username</h1>
-          <span class="mail">Louis.mony@gmail.com</span><br>
+          <h1>{{username}}</h1>
+          <span class="mail">{{mail}}</span><br>
           
         </div>
     </div>
@@ -42,6 +42,8 @@ export default {
   data(){
     return {
       activemodal: false,
+      username: localStorage.getItem('username'),
+      mail: localStorage.getItem('mail')
     }
   },
   methods:{

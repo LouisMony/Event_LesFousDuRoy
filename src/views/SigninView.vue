@@ -2,11 +2,14 @@
   <div class="signin">
     <form @submit.prevent="submitForm">
         <h1>Me connecter</h1>
+
         <label for="mail">Adresse email</label><br>
         <input type="text" name="mail" v-model="mail"/><br>
 
         <label for="password">Mot de passe</label><br>
         <input type="password" name="password" v-model="password"/><br>
+
+        <span class="error" v-if="modal_error">Adresse email ou mot de passe invalide.</span><br>
 
         <button>Suivant</button>
 
@@ -30,6 +33,7 @@ export default {
     return {
         mail:"",
         password:"",
+        modal_error: false
     }
   },
   methods:{
@@ -40,10 +44,17 @@ export default {
         })
         .then(function (response) {
            if (response.data.records[0].fields.Password === _this.password){
-            console.log('connected');
+            localStorage.setItem('state', 'ACTIVE')
+            localStorage.setItem('username', response.data.records[0].fields.Username)
+            localStorage.setItem('mail', response.data.records[0].fields.Adresse_mail)
+            localStorage.setItem('tel', response.data.records[0].fields.Telephone)
+            _this.$router.push('/')
            }
            else{
             console.log('not connected')
+            _this.modal_error = true
+            _this.mail = ""
+            _this.password = ""
            }
         })
         .catch(function (error) {
@@ -64,7 +75,6 @@ export default {
     flex-direction: column;
     height: 100vh;
     
-
     .anim_logo{
         height: 100%;
         position: relative;
@@ -93,6 +103,11 @@ export default {
     }
 
     form{
+        .error{
+            color: $rouge;
+            font-size: 12px;
+        }
+
         h1{
             margin: 0 auto 15px auto;
             font-weight: 600;
@@ -134,7 +149,7 @@ export default {
             border: none;
             outline:none;
             border-radius: 5px;
-            margin: 25px 0 25px 0;
+            margin: 5px 0 25px 0;
         }
 
         .redirect{

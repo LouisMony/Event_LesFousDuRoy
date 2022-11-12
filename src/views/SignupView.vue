@@ -1,21 +1,21 @@
 <template>
   <div class="signup">
     <h1>Créer mon compte</h1>
-    <form>
+    <form @submit.prevent="SignUp">
         <label for="username">Nom d'utilisateur</label><br>
-        <input type="text" name="username" /><br>
+        <input type="text" name="username" v-model="username" /><br>
 
         <label for="mail">Adresse email</label><br>
-        <input type="text" name="mail" /><br>
+        <input type="text" name="mail" v-model="mail"/><br>
 
         <label for="tel">Numéro de téléphone</label><br>
-        <input type="text" name="tel" /><br>
+        <input type="text" name="tel" v-model="tel"/><br>
 
         <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" /><br>
+        <input type="password" name="password" v-model="password" /><br>
 
         <label for="password_conf">Mot de passe</label><br>
-        <input type="password" name="password_conf" /><br>
+        <input type="password" name="password_conf" v-model="passwordconf"/><br>
 
         <label for="photo_profil">Photo de profil</label><br>
         <div class="photo_list">
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'Signup',
@@ -40,6 +41,11 @@ export default {
   data(){
     return {
         images: [],
+        username:"",
+        mail:"",
+        tel:"",
+        password:"",
+        passwordconf:"",
     }
   },
   mounted(){
@@ -61,6 +67,38 @@ export default {
     countFile(r){
         r.keys().forEach(key => (this.images.push({ Url: key })));
         console.log(this.images)
+    },
+
+    async SignUp(){
+        console.log('signup');
+        var _this = this
+        await http.post('Users', 
+        {
+            "records": [
+                {
+                    "fields": {
+                        "Password": _this.password,
+                        "Adresse_mail": _this.mail,
+                        "Username": _this.username,
+                        "Telephone": _this.tel
+                    }
+                }
+            ]
+        }, 
+        {
+            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+        })
+        .then(function (response) {
+            console.log(response.data)
+            localStorage.setItem('state', 'ACTIVE')
+            localStorage.setItem('username', _this.username)
+            localStorage.setItem('mail', _this.mail)
+            localStorage.setItem('tel', _this.tel)
+            _this.$router.push('/')
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
   } 
 }
