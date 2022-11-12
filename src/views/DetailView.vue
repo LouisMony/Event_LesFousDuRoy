@@ -108,7 +108,7 @@ export default {
         font-weight: 600;
         font-size: 32px;
         margin: 0;
-        color: $rouge;
+        color: $fontcolor;
       }
       h2{
         margin: 0 0 15px 0;

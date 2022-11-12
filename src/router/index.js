@@ -14,16 +14,37 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    beforeEnter: (to, from, next) => {
+      if(window.localStorage.getItem('state') === 'ACTIVE'){
+        next()
+      }else{
+        router.push('/me-connecter')
+      }
+    },
     component: HomeView
   },
   {
     path: '/detail/:id',
     name: 'detail',
+    beforeEnter: (to, from, next) => {
+      if(window.localStorage.getItem('state') === 'ACTIVE'){
+        next()
+      }else{
+        router.push('/me-connecter')
+      }
+    },
     component: DetailView
   },
   {
     path: '/my-profil',
     name: 'my-profil',
+    beforeEnter: (to, from, next) => {
+      if(window.localStorage.getItem('state') === 'ACTIVE'){
+        next()
+      }else{
+        router.push('/me-connecter')
+      }
+    },
     component: ProfilView
   },
   {
@@ -39,6 +60,13 @@ const routes = [
   {
     path: '/update-pp',
     name: 'update-pp',
+    beforeEnter: (to, from, next) => {
+      if(window.localStorage.getItem('state') === 'ACTIVE'){
+        next()
+      }else{
+        router.push('/me-connecter')
+      }
+    },
     component: UpdatephtotView
   }
 ]

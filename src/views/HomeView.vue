@@ -12,7 +12,7 @@
       </ul>
 
       <div class="event_list">
-        <EventItem v-for="item in event" :data=item />
+        <EventItem v-for="(item, index) in event" :data=item :key="index" />
       </div>
     </main>
   </div>

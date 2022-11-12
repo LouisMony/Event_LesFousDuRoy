@@ -4,7 +4,7 @@
 
     <div class="updtatephoto__main">
         <div class="photo_list">
-            <div v-for="(item, index) in images" v-bind:id="item.id" class="photo_list_item" :data-bg="item.Url">
+            <div v-for="(item, index) in images" v-bind:id="item.id" class="photo_list_item" :data-bg="item.Url" :key="index">
             </div>
         </div>
         

@@ -1,12 +1,12 @@
 <template>
   <div class="signin">
-    <form>
+    <form @submit.prevent="submitForm">
         <h1>Me connecter</h1>
         <label for="mail">Adresse email</label><br>
-        <input type="text" name="mail" /><br>
+        <input type="text" name="mail" v-model="mail"/><br>
 
         <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" /><br>
+        <input type="password" name="password" v-model="password"/><br>
 
         <button>Suivant</button>
 
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'Signin',
@@ -27,9 +28,28 @@ export default {
   },
   data(){
     return {
+        mail:"",
+        password:"",
     }
   },
   methods:{
+    async submitForm(){
+        var _this = this
+        await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))', {
+            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+        })
+        .then(function (response) {
+           if (response.data.records[0].fields.Password === _this.password){
+            console.log('connected');
+           }
+           else{
+            console.log('not connected')
+           }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
   } 
 }
 </script>
