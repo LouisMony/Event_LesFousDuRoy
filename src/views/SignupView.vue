@@ -1,21 +1,21 @@
 <template>
   <div class="signup">
     <h1>Créer mon compte</h1>
-    <form @submit.prevent="SignUp">
+    <form @submit.prevent="Verif">
         <label for="username">Nom d'utilisateur</label><br>
-        <input type="text" name="username" v-model="username" /><br>
+        <input type="text" name="username" v-model="username" required /><br>
 
         <label for="mail">Adresse email</label><br>
-        <input type="text" name="mail" v-model="mail"/><br>
+        <input type="text" name="mail" v-model="mail" required/><br>
 
         <label for="tel">Numéro de téléphone</label><br>
-        <input type="text" name="tel" v-model="tel"/><br>
+        <input type="text" name="tel" v-model="tel" required/><br>
 
         <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" v-model="password" /><br>
+        <input type="password" name="password" v-model="password" required/><br>
 
         <label for="password_conf">Mot de passe</label><br>
-        <input type="password" name="password_conf" v-model="passwordconf"/><br>
+        <input type="password" name="password_conf" v-model="passwordconf" required/><br>
 
         <label for="photo_profil">Photo de profil</label><br>
         <div class="photo_list">
@@ -24,7 +24,10 @@
             <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
             <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
         </div>
-        <button>Créer mon compte</button>
+
+        <span class="error" v-if="modal_error">{{error_content}}</span><br>
+
+        <button>{{button_state}}</button>
 
         <router-link class="redirect" to="me-connecter">Je n'ai pas encore de compte</router-link>
     </form>
@@ -46,6 +49,9 @@ export default {
         tel:"",
         password:"",
         passwordconf:"",
+        modal_error: false,
+        error_content : "Une erreur est survenue, réessayer.",
+        button_state: "Créer mon compte"
     }
   },
   mounted(){
@@ -66,21 +72,60 @@ export default {
 
     countFile(r){
         r.keys().forEach(key => (this.images.push({ Url: key })));
-        console.log(this.images)
     },
 
-    async SignUp(){
-        console.log('signup');
+    async Verif(){
+        this.button_state = "Patientez"
+        var _this = this
+        if(this.password === this.passwordconf){
+            await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))', {
+            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+            })
+            .then(function (response) {
+                if(response.data.records.length === 0){
+                    http.get('Users?filterByFormula=AND(SEARCH("'+_this.tel+'", {Telephone}))', {
+                    headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+                    })
+                    .then(function (response) {
+                        if(response.data.records.length === 0){ 
+                            _this.AddUser()
+                        }
+                        else{
+                            _this.error_content = "Ce numéro de téléphone est déja utilisée."
+                            _this.modal_error = true
+                            _this.button_state = "Créer mon compte"
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
+                else{
+                    _this.error_content = "Cette adresse email est déja utilisée."
+                    _this.modal_error = true
+                    _this.button_state = "Créer mon compte"
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+        else{
+            
+        }
+    },
+
+    async AddUser(){
         var _this = this
         await http.post('Users', 
         {
             "records": [
                 {
                     "fields": {
-                        "Password": _this.password,
-                        "Adresse_mail": _this.mail,
-                        "Username": _this.username,
-                        "Telephone": _this.tel
+                        "Password": this.password,
+                        "Adresse_mail": this.mail,
+                        "Username": this.username,
+                        "Telephone": this.tel
                     }
                 }
             ]
@@ -95,6 +140,7 @@ export default {
             localStorage.setItem('mail', _this.mail)
             localStorage.setItem('tel', _this.tel)
             _this.$router.push('/')
+            _this.button_state = "Créer mon compte"
         })
         .catch(function (error) {
             console.log(error);
@@ -117,6 +163,11 @@ export default {
     }
 
     form{
+        .error{
+            color: $rouge;
+            font-size: 12px;
+        }
+
         label{
             font-weight: 400;
             font-size: 14px;
