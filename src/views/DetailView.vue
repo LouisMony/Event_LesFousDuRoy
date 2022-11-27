@@ -33,7 +33,16 @@
         <p><span>Details :</span><br>Prix d'entrée : {{event.fields.Prix}} € <br>{{event.fields.Remarque}}</p>
       </div>
       <div class="detail_content_bottom">
-        <button>M’inscrire à cet évènement</button>
+        <button v-bind:class="{ scnd_state: second_class }" @click="modal=true">{{button_text}}</button>
+      </div>
+
+      <div v-if="modal" class="detail_modal">
+        <div class="detail_modal_box">
+          <span>ATTENTION</span>
+          <p>{{warning_text}}</p>
+          <button @click="modal=false" id="first">Retour</button>
+          <button @click="Inscription()">Confirmer</button>
+        </div>
       </div>
       
     </div>
@@ -51,7 +60,12 @@ export default {
   data(){
     return {
       page_id : this.$route.params.id,
-      event: []
+      event: [],
+      modal: false,
+      user_inscription: false,
+      second_class: false,
+      warning_text: "Il sera toujours possible de vous désinscrire par la suite.",
+      button_text: "M’inscrire à cet évènement" 
     }
   },
   mounted(){
@@ -71,6 +85,44 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+    },
+
+    async Inscription(){
+      console.log('start');
+      var _this = this
+      await http.post('Inscriptions', 
+      {
+          "records": [
+              {
+                  "fields": {
+                      "Events_name": this.event.fields.Name,
+                      "Adresse_mail": localStorage.getItem('mail'),
+                      "Username": localStorage.getItem('username'),
+                      "Telephone": localStorage.getItem('tel'),
+                      "Statut": "Inscrit"
+                  }
+              }
+          ]
+      }, 
+      {
+          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+      })
+      .then(function (response) {
+          console.log(response.data)
+          _this.UpdateEvent()
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+      this.modal = false
+      this.second_class = true
+      this.user_inscription = true
+      this.warning_text = "Êtes-vous sûre ? Si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
+      this.button_text = "Me désinscrire"
+    },
+
+    async UpdateEvent(){
+      console.log('start');
     }
   }
 }
@@ -84,6 +136,62 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
+
+  .detail_modal{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: rgba(233, 239, 242, 0.8);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .detail_modal_box{
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      text-align: center;
+      background-color: $scnd_bg;
+      border-radius: 20px;
+      box-sizing: border-box;
+      padding: 20px;
+      gap: 20px;
+
+      span{
+        color: $rouge;
+        font-weight: 600;
+        font-size: 20px;
+      }
+
+      p{
+        font-weight: 400;
+        font-size: 14px;
+        color: $fontcolor;
+        margin: 0;
+      }
+
+      button{
+        width: 100%;
+        height: 60px;
+        font-family: Poppins, Helvetica, Arial, sans-serif;
+        background-color: $rouge;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        outline:none;
+        border-radius: 10px;
+      }
+
+      #first{
+        background-color: $fontcolor;
+      }
+    }
+  }
 
   .detail_bg{
     box-sizing: border-box;
@@ -161,6 +269,12 @@ export default {
         border: none;
         outline:none;
         border-radius: 10px;
+      }
+
+      .scnd_state{
+        background: rgba(255, 58, 58, 0.15);
+        border: 1px solid $rouge;
+        color: $rouge;
       }
     }
   }
