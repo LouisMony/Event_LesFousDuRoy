@@ -41,7 +41,7 @@
           <span>ATTENTION</span>
           <p>{{warning_text}}</p>
           <button @click="modal=false" id="first">Retour</button>
-          <button @click="Inscription()">Confirmer</button>
+          <button @click="Action()">Confirmer</button>
         </div>
       </div>
       
@@ -62,14 +62,16 @@ export default {
       page_id : this.$route.params.id,
       event: [],
       modal: false,
-      user_inscription: false,
       second_class: false,
       warning_text: "Il sera toujours possible de vous désinscrire par la suite.",
-      button_text: "M’inscrire à cet évènement" 
+      button_text: "M’inscrire à cet évènement",
+      incriptionId : "",
+      currentAction: "Inscription"
     }
   },
   mounted(){
     this.getDetail()
+    
   },
   methods:{
     async getDetail(){
@@ -79,50 +81,86 @@ export default {
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
       .then(function (response) {
-        console.log(response.data);
         _this.event = response.data
+        _this.checkInscription()
       })
       .catch(function (error) {
         console.log(error);
       });
     },
 
-    async Inscription(){
-      console.log('start');
+    async checkInscription(){
       var _this = this
-      await http.post('Inscriptions', 
-      {
-          "records": [
-              {
-                  "fields": {
-                      "Events_name": this.event.fields.Name,
-                      "Adresse_mail": localStorage.getItem('mail'),
-                      "Username": localStorage.getItem('username'),
-                      "Telephone": localStorage.getItem('tel'),
-                      "Statut": "Inscrit"
-                  }
-              }
-          ]
-      }, 
-      {
+      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.$route.params.id+'")',{
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
       .then(function (response) {
-          console.log(response.data)
-          _this.UpdateEvent()
+        if(response.data.records[0].id){_this.incriptionId = response.data.records[0].id}
+        if (response.data.records.length === 1) {
+          _this.second_class = true
+          _this.warning_text = "Êtes-vous sûre ? Si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
+          _this.button_text = "Me désinscrire de cet évènement"
+        }
+        else{
+          _this.second_class = false
+          _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
+          _this.button_text = "M’inscrire à cet évènement"
+        }
       })
-      .catch(function (error) {
-          console.log(error);
-      });
-      this.modal = false
-      this.second_class = true
-      this.user_inscription = true
-      this.warning_text = "Êtes-vous sûre ? Si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
-      this.button_text = "Me désinscrire"
     },
 
-    async UpdateEvent(){
-      console.log('start');
+    async Action(){
+      var _this = this
+
+      //INSCRIPTIONS
+      if(this.currentAction === "Inscription"){
+        await http.post('Inscriptions', 
+        {
+            "records": [
+                {
+                    "fields": {
+                        "Events_name": this.event.fields.Name,
+                        "Adresse_mail": localStorage.getItem('mail'),
+                        "Username": localStorage.getItem('username'),
+                        "Telephone": localStorage.getItem('tel'),
+                        "Statut": "Inscrit",
+                        "Events_id" : this.$route.params.id,
+                    }
+                }
+            ]
+        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        .then(function (response) {
+            console.log(response.data)
+            _this.checkInscription()
+            _this.UpdateEvent()
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        this.modal = false
+        this.currentAction = "Desinscription"
+      }
+
+      //DESINSCRIPTIONS
+      else if(this.currentAction === "Desinscription"){
+        console.log('supprimer');
+        await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'',{
+            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+        })
+        .then(function (response) {
+          console.log(response);
+          _this.second_class = false
+          _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
+          _this.button_text = "M’inscrire à cet évènement"
+        })
+        this.modal = false
+        this.currentAction = "Inscription"
+      }
+      
+    },
+
+    async UpdateEvent(action){
+      //console.log('start');
     }
   }
 }
