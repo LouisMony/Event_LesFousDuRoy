@@ -89,12 +89,13 @@ export default {
         img{
             width: 25px;
             float: right;
+            opacity: 0;
         }
 
         p{
             font-weight: 600;
             margin: 0;
-            color: $rouge;
+            color: $fontcolor;
             line-height: 1;
             text-align: right;
 

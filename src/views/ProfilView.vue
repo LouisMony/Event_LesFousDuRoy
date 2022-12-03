@@ -15,16 +15,9 @@
     </div>
     <hr>
     <p>Mes prochains évènements :</p>
-    <div class="event_list">
-        <EventItem />
-        <EventItem />
-        <EventItem />
-        <EventItem />
-        <EventItem />
-        <EventItem />
-        <EventItem />
-        <EventItem />
-      </div>
+    <div class="event_list" v-if="display">
+      <EventItem v-for="(item, index) in event" :data="item" :key="index" />
+    </div>
   </div>
 </template>
 
@@ -32,6 +25,7 @@
 
 import EventItem from '@/components/EventItem.vue'
 import ModalProfil from '@/components/ModalProfil.vue'
+import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'ProfilView',
@@ -43,10 +37,51 @@ export default {
     return {
       activemodal: false,
       username: localStorage.getItem('username'),
-      mail: localStorage.getItem('mail')
+      mail: localStorage.getItem('mail'),
+      event:"",
+      inscription_arr:"", 
+      display: false
     }
   },
+
+  mounted(){
+    this.display = false
+    this.GetEvents()
+    //this.getInscription()
+    //this.filterInscriptions()
+  },
+
   methods:{
+    async GetEvents(){
+      var _this = this
+      await http.get('Evenements', {
+          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+      })
+      .then(function (response) {
+        _this.event = response.data.records
+        _this.getInscription()
+      })
+    },
+
+    async getInscription(){
+      
+      var _this = this
+      await http.get('Inscriptions?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))', {
+          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+      })
+      .then(function (response) {
+        _this.inscription_arr = response.data.records;
+        _this.filterInscriptions()
+      })
+    },
+
+    async filterInscriptions(){
+      console.log('coucou');
+      this.event = this.event.filter(({id}) =>
+        this.inscription_arr.some(exclude => exclude.fields.Events_id === id)
+      );
+      this.display = true
+    }
   } 
 }
 </script>
