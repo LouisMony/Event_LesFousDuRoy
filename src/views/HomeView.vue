@@ -12,7 +12,7 @@
       </ul>
 
       <div class="event_list">
-        <EventItem v-for="(item, index) in event" :data=item :key="index" />
+        <EventItem v-for="(item, index) in event" :data="item" :key="index" />
       </div>
     </main>
   </div>
@@ -58,7 +58,6 @@ export default {
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
       .then(function (response) {
-        console.log(response.data);
         _this.event = response.data.records
       })
       .catch(function (error) {

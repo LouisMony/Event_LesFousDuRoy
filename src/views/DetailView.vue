@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
-    <div class="detail_bg" v-bind:style="{ 'background-image': 'url(' + event.fields.Illustration[0].url + ')' }" @click="$router.go(-1)">
-      <img src="@/assets/img/arrow_left.svg" alt="Retourner à la page précédente">
+    <div class="detail_bg" v-bind:style="{ 'background-image': 'url(' + event.fields.Illustration[0].url + ')' }">
+      <img src="@/assets/img/arrow_left.svg" alt="Retourner à la page précédente" @click="$router.go(-1)">
     </div>
     <div class="detail_content">
       <div class="detail_content_top">
@@ -54,9 +54,6 @@ import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'EventItem',
-  props: {
-    data: Object,
-  },
   data(){
     return {
       page_id : this.$route.params.id,
@@ -66,7 +63,7 @@ export default {
       warning_text: "Il sera toujours possible de vous désinscrire par la suite.",
       button_text: "M’inscrire à cet évènement",
       incriptionId : "",
-      currentAction: "Inscription"
+      currentAction: ""
     }
   },
   mounted(){
@@ -76,44 +73,42 @@ export default {
   methods:{
     async getDetail(){
       var _this = this
-      var id = this.page_id
-      await http.get('Evenements/'+id, {
+      await http.get('Evenements/'+this.page_id, {
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
       .then(function (response) {
         _this.event = response.data
         _this.checkInscription()
       })
-      .catch(function (error) {
-        console.log(error);
-      });
     },
 
     async checkInscription(){
       var _this = this
-      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.$route.params.id+'")',{
+      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'")',{
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
-      .then(function (response) {
-        if(response.data.records[0].id){_this.incriptionId = response.data.records[0].id}
+      .then(function (response) {      
         if (response.data.records.length === 1) {
+          _this.incriptionId = response.data.records[0].id
           _this.second_class = true
           _this.warning_text = "Êtes-vous sûre ? Si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
           _this.button_text = "Me désinscrire de cet évènement"
+          _this.currentAction = "Desinscription"
         }
         else{
           _this.second_class = false
           _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
           _this.button_text = "M’inscrire à cet évènement"
+          _this.currentAction = "Inscription"
         }
       })
     },
 
     async Action(){
       var _this = this
-
       //INSCRIPTIONS
       if(this.currentAction === "Inscription"){
+        console.log("INSCRIPTION");
         await http.post('Inscriptions', 
         {
             "records": [
@@ -130,37 +125,46 @@ export default {
             ]
         }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
         .then(function (response) {
-            console.log(response.data)
             _this.checkInscription()
-            _this.UpdateEvent()
+            _this.UpdateEvent(true)
         })
         .catch(function (error) {
             console.log(error);
         });
         this.modal = false
-        this.currentAction = "Desinscription"
       }
 
       //DESINSCRIPTIONS
       else if(this.currentAction === "Desinscription"){
-        console.log('supprimer');
+        console.log("DESINSCRIPTION");
         await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'',{
             headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
         })
         .then(function (response) {
-          console.log(response);
-          _this.second_class = false
-          _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
-          _this.button_text = "M’inscrire à cet évènement"
+           _this.checkInscription()
+          _this.UpdateEvent(false)
         })
         this.modal = false
-        this.currentAction = "Inscription"
       }
       
     },
 
     async UpdateEvent(action){
-      //console.log('start');
+      if(action === true){
+        await http.get('Evenements/'+this.page_id, {
+          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+        })
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+      else{
+        console.log('moins');
+      }
+      
     }
   }
 }
