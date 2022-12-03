@@ -150,21 +150,25 @@ export default {
     },
 
     async UpdateEvent(action){
-      if(action === true){
-        await http.get('Evenements/'+this.page_id, {
-          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-        })
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
-      else{
-        console.log('moins');
-      }
-      
+      var _this = this
+      if(action === true){var new_number = this.event.fields.Nombre_inscriptions + 1}
+      else{var new_number = this.event.fields.Nombre_inscriptions - 1}
+
+      await http.patch('Evenements', 
+      {
+          "records": [
+              {
+                  "id": this.page_id,
+                  "fields": {
+                      "Nombre_inscriptions": new_number,
+                  }
+              }
+          ]
+      }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+      .then(function (response) {
+        console.log(response.data);
+        _this.event.fields.Nombre_inscriptions = new_number
+      })      
     }
   }
 }
