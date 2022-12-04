@@ -33,6 +33,7 @@
         <p><span>Details :</span><br>Prix d'entrée : {{event.fields.Prix}} € <br>{{event.fields.Remarque}}</p>
       </div>
       <div class="detail_content_bottom">
+        <span v-if="full">Cet événement est actuellement complet, vous pouvez cependant vous inscrire dans la file d’attente : en cas de désistement d’un participant vous pourriez être recontacter par notre équipe pour pouvoir participer.</span>
         <button v-bind:class="{ scnd_state: second_class }" @click="modal=true">{{button_text}}</button>
       </div>
 
@@ -63,12 +64,12 @@ export default {
       warning_text: "Il sera toujours possible de vous désinscrire par la suite.",
       button_text: "M’inscrire à cet évènement",
       incriptionId : "",
-      currentAction: ""
+      currentAction: "",
+      full: false
     }
   },
   mounted(){
     this.getDetail()
-    
   },
   methods:{
     async getDetail(){
@@ -78,28 +79,54 @@ export default {
       })
       .then(function (response) {
         _this.event = response.data
+        if(_this.event.fields.Nombre_inscriptions === _this.event.fields.Nombre_Participants){
+          _this.full = true
+        }
         _this.checkInscription()
       })
     },
 
     async checkInscription(){
       var _this = this
-      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'")',{
+      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'",{Statut}="Inscrit" )',{
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
-      .then(function (response) {      
+      .then(async function (response) {      
         if (response.data.records.length === 1) {
           _this.incriptionId = response.data.records[0].id
           _this.second_class = true
-          _this.warning_text = "Êtes-vous sûre ? Si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
+          _this.warning_text = "Êtes-vous sûre ? Cette action n'est pas annulable, si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
           _this.button_text = "Me désinscrire de cet évènement"
           _this.currentAction = "Desinscription"
         }
         else{
-          _this.second_class = false
-          _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
-          _this.button_text = "M’inscrire à cet évènement"
-          _this.currentAction = "Inscription"
+          
+          await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+_this.page_id+'",{Statut}="List")',{
+              headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+          })
+          .then(function (response) { 
+            console.log(response.data.records.length); 
+            if (response.data.records.length === 1) {
+              _this.incriptionId = response.data.records[0].id
+              _this.second_class = true
+              _this.warning_text = "Êtes-vous sûre ? Cette action n'est pas annulable, en sortant de la file d'attente vous perdrez votre position dans cette dernière. "
+              _this.button_text = "Sortir de la file d'attente"
+              _this.currentAction = "Desinscription"
+            }
+            else{
+              _this.currentAction = "Inscription"
+              _this.second_class = false
+              _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
+              if(_this.full === false){
+                _this.button_text = "M’inscrire à cet évènement"
+
+              }else{
+                _this.button_text = "M’inscrire sur file d'attente"
+              }
+              
+            }
+          })
+          
         }
       })
     },
@@ -107,7 +134,7 @@ export default {
     async Action(){
       var _this = this
       //INSCRIPTIONS
-      if(this.currentAction === "Inscription"){
+      if(this.currentAction === "Inscription" && this.full ===false){
         console.log("INSCRIPTION");
         await http.post('Inscriptions', 
         {
@@ -134,6 +161,31 @@ export default {
         this.modal = false
       }
 
+      //INSCRIPTIONS FILL D'ATTENTE
+      else if(this.currentAction === "Inscription" && this.full === true){
+        console.log("INSCRIPTION FILE ");
+        await http.post('Inscriptions', 
+        {
+            "records": [
+                {
+                    "fields": {
+                        "Events_name": this.event.fields.Name,
+                        "Adresse_mail": localStorage.getItem('mail'),
+                        "Username": localStorage.getItem('username'),
+                        "Telephone": localStorage.getItem('tel'),
+                        "Statut": "List",
+                        "Events_id" : this.$route.params.id,
+                    }
+                }
+            ]
+        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        .then(function (response) {
+            _this.checkInscription()
+            //_this.UpdateEvent(true)
+        })
+        this.modal = false
+      }
+
       //DESINSCRIPTIONS
       else if(this.currentAction === "Desinscription"){
         console.log("DESINSCRIPTION");
@@ -142,7 +194,9 @@ export default {
         })
         .then(function (response) {
            _this.checkInscription()
-          _this.UpdateEvent(false)
+           if(_this.full === false){
+              _this.UpdateEvent(false)
+           }
         })
         this.modal = false
       }
@@ -304,6 +358,12 @@ export default {
       }
     }
     .detail_content_bottom{
+      span{
+        font-weight: 400;
+        font-size: 12px;
+        text-align: justify;
+        color: $rouge;
+      }
       button{
         width: 100%;
         height: 65px;

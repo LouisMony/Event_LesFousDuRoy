@@ -47,8 +47,6 @@ export default {
   mounted(){
     this.display = false
     this.GetEvents()
-    //this.getInscription()
-    //this.filterInscriptions()
   },
 
   methods:{
