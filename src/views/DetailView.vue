@@ -105,7 +105,6 @@ export default {
               headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
           })
           .then(function (response) { 
-            console.log(response.data.records.length); 
             if (response.data.records.length === 1) {
               _this.incriptionId = response.data.records[0].id
               _this.second_class = true
@@ -155,9 +154,6 @@ export default {
             _this.checkInscription()
             _this.UpdateEvent(true)
         })
-        .catch(function (error) {
-            console.log(error);
-        });
         this.modal = false
       }
 
@@ -174,6 +170,7 @@ export default {
                         "Username": localStorage.getItem('username'),
                         "Telephone": localStorage.getItem('tel'),
                         "Statut": "List",
+                        "List_number": this.event.fields.Attente + 1,
                         "Events_id" : this.$route.params.id,
                     }
                 }
@@ -181,7 +178,7 @@ export default {
         }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
         .then(function (response) {
             _this.checkInscription()
-            //_this.UpdateEvent(true)
+            _this.UpdateEvent(true)
         })
         this.modal = false
       }
@@ -193,10 +190,8 @@ export default {
             headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
         })
         .then(function (response) {
-           _this.checkInscription()
-           if(_this.full === false){
-              _this.UpdateEvent(false)
-           }
+          _this.checkInscription()
+          _this.UpdateEvent(false)
         })
         this.modal = false
       }
@@ -204,25 +199,47 @@ export default {
     },
 
     async UpdateEvent(action){
+      console.log('tsrat');
       var _this = this
-      if(action === true){var new_number = this.event.fields.Nombre_inscriptions + 1}
-      else{var new_number = this.event.fields.Nombre_inscriptions - 1}
+      if(action === true && this.full === false){var new_number = this.event.fields.Nombre_inscriptions + 1}
+      else if(action === true && this.full === true){var new_number = this.event.fields.Attente + 1}
+      else if(action === false && this.full === false){var new_number = this.event.fields.Nombre_inscriptions - 1}
+      else if(action === false && this.full === true){var new_number = this.event.fields.Attente - 1}
 
-      await http.patch('Evenements', 
-      {
-          "records": [
-              {
-                  "id": this.page_id,
-                  "fields": {
-                      "Nombre_inscriptions": new_number,
-                  }
-              }
-          ]
-      }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
-      .then(function (response) {
-        console.log(response.data);
-        _this.event.fields.Nombre_inscriptions = new_number
-      })      
+      if(this.full === false){
+        await http.patch('Evenements', 
+        {
+            "records": [
+                {
+                    "id": this.page_id,
+                    "fields": {
+                        "Nombre_inscriptions": new_number,
+                    }
+                }
+            ]
+        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        .then(function (response) {
+          _this.event.fields.Nombre_inscriptions = new_number
+        })   
+      }
+      
+      else if(this.full === true){
+        console.log('new ' + new_number);
+        await http.patch('Evenements', 
+        {
+            "records": [
+                {
+                    "id": this.page_id,
+                    "fields": {
+                        "Attente": new_number,
+                    }
+                }
+            ]
+        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        .then(function (response) {
+          _this.event.fields.Attente = new_number
+        }) 
+      }
     }
   }
 }
