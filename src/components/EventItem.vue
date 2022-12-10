@@ -4,15 +4,15 @@
         <div class="image" v-bind:style="{ 'background-image': 'url(' + data.fields.Illustration[0].url + ')' }"></div>
         
         <p>
-          <span>{{data.fields.Name}}</span><br>
+          <span id="event_name">{{data.fields.Name}}</span><br>
           {{data.fields.Select}}<br>
           {{data.fields.Date}}
         </p>
     </div>
     <div class="event_item_right">
         <img src="@/assets/img/arrow_right.svg" alt="Voir les details du tournois">
-        <p>{{data.fields.Nombre_inscriptions}} / {{data.fields.Nombre_Participants}}<br><span>Participants</span></p>
-        
+        <p v-if="data.fields.Nombre_inscriptions<data.fields.Nombre_Participants">{{data.fields.Nombre_inscriptions}} / {{data.fields.Nombre_Participants}}<br><span>Participants</span></p>
+        <p v-else id="full">Sur fil d'attente</p>
     </div>
   </div>
 </template>
@@ -28,7 +28,11 @@ export default {
       
     }
   },
-  
+  mounted(){
+    var date = new Date(this.data.fields.Date)
+    this.data.fields.Date = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()
+  },
+
   methods:{
   }
 }
@@ -103,6 +107,12 @@ export default {
               font-weight: 400;
               font-size: 11px;
             }
+        }
+        #full{
+          color: $rouge;
+          font-style: italic;
+          font-weight: 400;
+          font-size: 11px;
         }
     }
 }

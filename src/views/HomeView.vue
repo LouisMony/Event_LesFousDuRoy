@@ -2,7 +2,7 @@
   <div class="home">
     <header>
       <img src="@/assets/img/logo.svg" alt="Logo events">
-      <input type="text" placeholder="Rechercher un évenement">
+      <input type="text" placeholder="Rechercher un évenement" v-model="searchedvalue">
     </header>
     <main>
       <ul class="filter">
@@ -12,7 +12,7 @@
       </ul>
 
       <div class="event_list">
-        <EventItem v-for="(item, index) in event" :data="item" :key="index" />
+        <EventItem class="event_list_item" v-for="(item, index) in event" :data="item" :key="index" />
       </div>
     </main>
   </div>
@@ -31,9 +31,33 @@ export default {
   data(){
     return {
       active_id : "li_a",
-      event: []
+      event: [],
+      searchedvalue:'',
     }
   },
+
+  watch: {
+      searchedvalue: function(val) {
+          const events = Array.from(document.querySelectorAll('.event_list_item'))
+          if(val !== ''){
+              val = val.toLowerCase()
+              events.forEach(item => {
+                  var name =item.querySelector('#event_name').textContent.toLowerCase();
+                  if(name.includes(val)){
+                      item.style.display = "flex"
+                  }
+                  else{
+                      item.style.display = "none"
+                  }
+              })
+          }else{
+              events.forEach(item => {
+                  item.style.display = "flex"
+              })
+          }
+      }
+  },
+
   mounted(){
     this.GetEvents()
   },
