@@ -38,7 +38,7 @@ export default {
 @import "@/assets/style/_variables.scss";
 
 .options{
-    padding: 25px 15px;
+    padding: 15px 15px 0 15px;
     box-sizing: border-box;
     width: 100%;
     font-size: 14px;
