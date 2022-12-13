@@ -6,6 +6,7 @@ import ProfilView from '../views/ProfilView.vue'
 import Signin from '../views/SigninView.vue'
 import Signup from '../views/SignupView.vue'
 import UpdatephtotView from '../views/UpdatephtotView.vue'
+import OptionsView from '../views/OptionsView.vue'
 
 
 Vue.use(VueRouter)
@@ -46,6 +47,18 @@ const routes = [
       }
     },
     component: ProfilView
+  },
+  {
+    path: '/options',
+    name: 'options',
+    beforeEnter: (to, from, next) => {
+      if(window.localStorage.getItem('state') === 'ACTIVE'){
+        next()
+      }else{
+        router.push('/me-connecter')
+      }
+    },
+    component: OptionsView
   },
   {
     path: '/me-connecter',

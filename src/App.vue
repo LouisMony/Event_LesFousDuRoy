@@ -3,7 +3,7 @@
     <transition name="slide" mode="out-in">
       <router-view/>
     </transition>
-    <Navbar v-if="this.$route.name === 'home' || this.$route.name === 'my-profil'"/>
+    <Navbar v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
   </div>
 </template>
 

@@ -1,10 +1,5 @@
 <template>
   <div class="profil">
-    <transition name="fade" mode="out-in">
-        <ModalProfil v-if="activemodal"/>
-    </transition>
-    <img v-if="!activemodal" class="option"  @click="activemodal = true" src="@/assets/img/option.svg" alt="Option de profil" />
-    <img v-if="activemodal" class="close"  @click="activemodal = false" src="@/assets/img/close.svg" alt="Fermer" />
     <div class="profil_top">
         <div class="photo_profil"></div>
         <div class="profil_info">
@@ -24,14 +19,12 @@
 <script>
 
 import EventItem from '@/components/EventItem.vue'
-import ModalProfil from '@/components/ModalProfil.vue'
 import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'ProfilView',
   components: {
     EventItem,
-    ModalProfil
   },
   data(){
     return {
