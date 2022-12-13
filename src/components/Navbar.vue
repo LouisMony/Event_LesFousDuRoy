@@ -15,7 +15,7 @@
         <path class="svg" d="M16 16C19.6819 16 22.6667 13.0152 22.6667 9.33334C22.6667 5.65144 19.6819 2.66667 16 2.66667C12.3181 2.66667 9.33337 5.65144 9.33337 9.33334C9.33337 13.0152 12.3181 16 16 16Z" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path class="svg" d="M27.4533 29.3333C27.4533 24.1733 22.32 20 16 20C9.67996 20 4.54663 24.1733 4.54663 29.3333" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>Compte</span>
+        <span>Inscriptions</span>
       </li>
       <li class="nav_li" v-bind:class="{ active: activeOption }" v-on:click="$router.push('/options'); reloadNavbar()">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,22 +90,24 @@ export default {
     width: 100%;
 
     li{
+      color: $fontcolor;
       padding: 0;
       margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: px;
+      gap: 4px;
       transition: all 200ms linear;
+      font-size: 11px;
 
       .svg{
         stroke: $fontcolor
       }
       
       span{
-        display: none;
-        font-size: 13px;
+
+        
       }
     }
 

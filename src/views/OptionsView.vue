@@ -1,8 +1,10 @@
 <template>
   <div class="options">
-    <button>Modifier mon profil</button>
-    <button @click="$router.replace({ path: '/update-pp' })">Modifier ma photo profil</button>
-    <button @click="Disconnect()">Me déconnecter</button>
+    <div>Modifier mon profil</div>
+    <div @click="$router.replace({ path: '/update-pp' })">Modifier ma photo profil</div>
+    <div>Nous contactez</div>
+    <div>Utilisation des données</div>
+    <div id="deco" @click="Disconnect()">Me déconnecter</div>
   </div>
 </template>
 
@@ -36,34 +38,26 @@ export default {
 @import "@/assets/style/_variables.scss";
 
 .options{
-    padding: 40px 0;
-    height: fit-content;
-    width: 80%;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 20px;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    gap: 30px;
+    gap: 5px;
 
-    button{
-        width: calc(100% - 100px);
-        height: 45px;
-        font-family: Poppins, Helvetica, Arial, sans-serif;
-        background-color: transparent;
-        color: $fontcolor;
-        font-weight: 500;
-        font-size: 16px;
-        border: none;
-        outline:none;
-        border-radius: 10px;
+    div{
+        height: 50px;
+        display: flex;
+        justify-content: space-between ;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 10px;
+        background-color: $scnd_bg;
+    }
 
-        &:nth-child(3){
-            color: $rouge;
-        }
+    #deco{
+        color: $rouge;
     }
 }
 </style>
