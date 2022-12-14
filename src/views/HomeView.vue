@@ -126,7 +126,7 @@ export default {
   main{
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 179px);
+    height: calc(100vh - 155px);
 
     ul{
       margin:25px 0;

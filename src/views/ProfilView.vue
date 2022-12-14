@@ -94,7 +94,7 @@ export default {
     padding: 15px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 70px);
 
     .option{
       position: absolute;

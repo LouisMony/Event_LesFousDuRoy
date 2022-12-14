@@ -71,7 +71,7 @@ export default {
 
 .navbar{
   border-top: 0px solid $hr;
-  //background: $bg_black;
+  background: $scnd_bg;
   height: 75px;
   display: flex;
   align-items: center;
