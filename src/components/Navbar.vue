@@ -3,18 +3,25 @@
    <ul>
       <li class="nav_li" v-bind:class="{ active: activeMain }" v-on:click="$router.push('/'); reloadNavbar()">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="svg" d="M4 29.3333H28" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="svg" d="M7.46663 11.1733H5.33333C4.6 11.1733 4 11.7733 4 12.5067V24C4 24.7333 4.6 25.3333 5.33333 25.3333H7.46663C8.19997 25.3333 8.79997 24.7333 8.79997 24V12.5067C8.79997 11.7733 8.19997 11.1733 7.46663 11.1733Z" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="svg" d="M17.0666 6.92001H14.9333C14.2 6.92001 13.6 7.52001 13.6 8.25335V24C13.6 24.7333 14.2 25.3333 14.9333 25.3333H17.0666C17.7999 25.3333 18.3999 24.7333 18.3999 24V8.25335C18.3999 7.52001 17.7999 6.92001 17.0666 6.92001Z" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="svg" d="M26.6667 2.66667H24.5334C23.8001 2.66667 23.2001 3.26667 23.2001 4.00001V24C23.2001 24.7333 23.8001 25.3333 24.5334 25.3333H26.6667C27.4 25.3333 28 24.7333 28 24V4.00001C28 3.26667 27.4 2.66667 26.6667 2.66667Z" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M29.24 9.01343L24.7466 27.0535C24.4266 28.4001 23.2267 29.3334 21.84 29.3334H4.31997C2.30664 29.3334 0.866657 27.36 1.46666 25.4267L7.07998 7.40015C7.46665 6.14681 8.62666 5.28003 9.93333 5.28003H26.3333C27.6 5.28003 28.6533 6.05337 29.0933 7.12004C29.3467 7.69337 29.4 8.34676 29.24 9.01343Z" stroke="#222222" stroke-width="1.5" stroke-miterlimit="10"/>
+        <path class="svg" d="M21.3333 29.3333H27.7066C29.4266 29.3333 30.7733 27.88 30.6533 26.16L29.3333 8" stroke="#222222" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M12.9067 8.50676L14.2934 2.74683" stroke="#222222" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M21.84 8.52002L23.0934 2.7334" stroke="#222222" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M10.2667 16H20.9333" stroke="#222222" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M8.93335 21.3333H19.6" stroke="#222222" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span>Events</span>
       </li>
       <li class="nav_li" v-bind:class="{ active: activeProfil }" v-on:click="$router.push('/my-profil'); reloadNavbar()">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="svg" d="M16 16C19.6819 16 22.6667 13.0152 22.6667 9.33334C22.6667 5.65144 19.6819 2.66667 16 2.66667C12.3181 2.66667 9.33337 5.65144 9.33337 9.33334C9.33337 13.0152 12.3181 16 16 16Z" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="svg" d="M27.4533 29.3333C27.4533 24.1733 22.32 20 16 20C9.67996 20 4.54663 24.1733 4.54663 29.3333" stroke="#1A212F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="svg" d="M15.125 26.8125H28.875" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M15.125 17.1875H28.875" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M15.125 7.5625H28.875" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M4.125 7.5625L5.5 8.9375L9.625 4.8125" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M4.125 17.1875L5.5 18.5625L9.625 14.4375" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="svg" d="M4.125 26.8125L5.5 28.1875L9.625 24.0625" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+
         <span>Inscriptions</span>
       </li>
       <li class="nav_li" v-bind:class="{ active: activeOption }" v-on:click="$router.push('/options'); reloadNavbar()">

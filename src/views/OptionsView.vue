@@ -1,10 +1,25 @@
 <template>
   <div class="options">
-    <div>Modifier mon profil</div>
-    <div @click="$router.replace({ path: '/update-pp' })">Modifier ma photo profil</div>
-    <div>Nous contactez</div>
-    <div>Utilisation des données</div>
-    <div id="deco" @click="Disconnect()">Me déconnecter</div>
+    <div>
+      Modifier mon profil
+      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+    </div>
+    <div @click="$router.replace({ path: '/update-pp' })">
+      Modifier ma photo profil
+      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+    </div>
+    <div>
+      Nous contactez
+      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+    </div>
+    <div>
+      Utilisation des données
+      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+    </div>
+    <div id="deco" @click="Disconnect()">
+      Me déconnecter
+      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+    </div>
   </div>
 </template>
 
@@ -54,6 +69,10 @@ export default {
         box-sizing: border-box;
         padding: 0 10px;
         background-color: $scnd_bg;
+
+        img{
+          height: 15px;
+        }
     }
 
     #deco{

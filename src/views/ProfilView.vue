@@ -115,19 +115,16 @@ export default {
       gap: 25px;
 
       .photo_profil{
-          mask: paint(squircle);
-          --squircle-radius: 30px;
-          --squircle-smooth: 0.4;
-          max-width: 200px;
+          
+          max-width: 100px;
           width: 40%;
           aspect-ratio: 1/1;
           margin: 0;
-
+          border-radius: 50%;
           background-image: url("@/assets/img/bg_username.png");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;
-          filter: drop-shadow(0px 10px 30px rgba(0, 0, 0, 0.65));
       }
 
       .profil_info{
@@ -140,10 +137,6 @@ export default {
         span{
           color: $fontcolor;
           font-size: 12px;
-        }
-
-        button{
-
         }
       }
     }

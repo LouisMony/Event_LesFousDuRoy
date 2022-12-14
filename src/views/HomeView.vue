@@ -6,9 +6,9 @@
     </header>
     <main>
       <ul class="filter">
-        <li id="li_a" class="filter_li active" v-on:click="toogleActive('li_a')">Date</li>
-        <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b')">Thème</li>
-        <li id="li_c" class="filter_li" v-on:click="toogleActive('li_c')">Lieu</li>
+        <li id="li_a" class="filter_li active" v-on:click="toogleActive('li_a'); filterby('Date', 'desc')">Date</li>
+        <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b'); filterby('Select' , 'desc')">Thème</li>
+        <li id="li_c" class="filter_li" v-on:click="toogleActive('li_c'); filterby('Nombre_inscriptions', 'asc')">Places</li>
       </ul>
 
       <div class="event_list">
@@ -59,7 +59,7 @@ export default {
   },
 
   mounted(){
-    this.GetEvents()
+    this.filterby("Date", "desc")
   },
   methods:{
     toogleActive(id){
@@ -76,9 +76,11 @@ export default {
         })
       } 
     },
-    async GetEvents(){
+
+    async filterby(param, sens){
       var _this = this
-      await http.get('Evenements', {
+      var url = 
+      await http.get('Evenements?sort%5B0%5D%5Bfield%5D='+param+'&sort%5B0%5D%5Bdirection%5D='+sens+'', {
           headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
       })
       .then(function (response) {
@@ -87,7 +89,9 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
-    }
+    },
+    
+    
   } 
 }
 </script>
@@ -142,6 +146,7 @@ export default {
         position: relative;
         padding: 0;
         margin: 0;
+        font-size: 14px;
       }
 
       .active{
