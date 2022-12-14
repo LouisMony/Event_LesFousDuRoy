@@ -51,8 +51,6 @@ export default {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
-
     .event_item_left{
         display: flex;
         align-items: flex-start;

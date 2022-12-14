@@ -164,6 +164,6 @@ export default {
       min-height: 0px; 
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 15px;
     }
 </style>

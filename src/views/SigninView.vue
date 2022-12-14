@@ -9,7 +9,7 @@
         <label for="password">Mot de passe</label><br>
         <input type="password" name="password" v-model="password"/><br>
 
-        <span class="error" v-if="modal_error">Adresse email ou mot de passe invalide.</span><br>
+        <span class="error" v-if="modal_error">Adresse email ou mot de passe invalide.<br></span>
 
         <button>Suivant</button>
 
@@ -85,6 +85,7 @@ export default {
 
     img{
         width: 15%;
+        max-width: 100px;
         transform: rotate(0deg) translate(-50%, -50%);
         animation: rotating 10s linear infinite;
     }
@@ -127,8 +128,8 @@ export default {
             outline: none;
             border: 1px solid $focus;
             width: 100%;
-            height: 55px;
-            margin:10px 0 20px 0;
+            height: 40px;
+            margin:0px 0 20px 0;
             border-radius: 5px;
             color: $fontcolor;
             padding: 0 10px;
@@ -149,7 +150,7 @@ export default {
             border: none;
             outline:none;
             border-radius: 5px;
-            margin: 5px 0 25px 0;
+            margin: 10px 0 25px 0;
         }
 
         .redirect{

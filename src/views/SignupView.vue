@@ -29,7 +29,7 @@
 
         <button>{{button_state}}</button>
 
-        <router-link class="redirect" to="me-connecter">Je n'ai pas encore de compte</router-link>
+        <router-link class="redirect" to="me-connecter">J'ai déja un compte.</router-link>
     </form>
   </div>
 </template>
@@ -182,8 +182,8 @@ export default {
             outline: none;
             border: 1px solid $focus;
             width: 100%;
-            height: 55px;
-            margin:10px 0 20px 0;
+            height: 40px;
+            margin:0px 0 20px 0;
             border-radius: 5px;
             color: $fontcolor;
             padding: 0 10px;
@@ -259,11 +259,11 @@ export default {
             background-color: $rouge;
             color: white;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 16px;
             border: none;
             outline:none;
             border-radius: 5px;
-            margin: 25px 0 25px 0;
+            margin: 10px 0 25px 0;
         }
 
         .redirect{
