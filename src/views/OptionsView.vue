@@ -8,9 +8,20 @@
       Modifier ma photo profil
       <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
     </div>
-    <div>
-      Nous contactez
-      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+    <div id="option_contact" v-on:click="Contact()" v-bind:class="{ active: showContact }">
+      <div class="option_contact_first">
+        Nous contactez
+        <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+      </div>
+      <div v-if="showContact" class="option_contact_sncd">
+        <div class="ligne"></div>
+        <span>Télephone :</span> 01 39 53 30 34<br>
+        <span>Mail :</span> contact@lesfousduroy.fr<br>
+        <span>Boutique :</span> Ouverte de 10h à 20h, du lundi au samedi<br>
+        <span>Facebook :</span> <a href="https://www.facebook.com/fousduroy/" target="_blank">@Les Fous du Roy</a><br>
+        <span>Instagram :</span> <a href="https://www.instagram.com/les_fous_du_roy/" target="_blank">@les_fous_du_roy</a>
+
+      </div>
     </div>
     <div>
       Utilisation des données
@@ -33,7 +44,7 @@ export default {
   },
   data(){
     return {
-    
+      showContact: false
     }
   },
 
@@ -44,6 +55,15 @@ export default {
     Disconnect(){
       localStorage.clear()
       this.$router.push('/me-connecter')
+    },
+
+    Contact(){
+      if(this.showContact === true){
+        this.showContact = false
+      }
+      else{
+        this.showContact = true
+      }
     }
   }
 }
@@ -63,6 +83,7 @@ export default {
 
     div{
         height: 50px;
+        overflow: hidden;
         display: flex;
         justify-content: space-between ;
         align-items: center;
@@ -73,6 +94,52 @@ export default {
         img{
           height: 15px;
         }
+
+        
+    }
+
+    #option_contact{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 50px;
+      transition: all 200ms linear;
+        
+        div{
+          height: fit-content;
+          display: flex;
+          justify-content: space-between ;
+          align-items: center;
+          width: 100%;
+          padding: 0;
+        }
+        .option_contact_sncd{
+          font-size: 14px;
+          display: block;
+          padding: 0 0 15px 0;
+
+          .ligne{
+            margin-bottom: 15px;
+            border-top: 1px solid $hr ;
+          }
+
+          span{
+            font-weight: 600;
+          }
+
+          a{
+            color: $fontcolor;
+          }
+        }
+    }
+
+    .active{
+      height: fit-content!important;
+      justify-content: flex-start!important;
+
+      .option_contact_first{
+        height: 50px!important;
+      }
     }
 
     #deco{

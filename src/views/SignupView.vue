@@ -159,7 +159,7 @@ export default {
     h1{
         margin: 0 auto 15px auto;
         font-weight: 600;
-        font-size: 32px;
+        font-size: 24px;
     }
 
     form{
@@ -254,7 +254,7 @@ export default {
 
         button{
             width: 100%;
-            height: 55px;
+            height: 40px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
             background-color: $rouge;
             color: white;

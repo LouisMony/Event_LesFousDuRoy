@@ -1,5 +1,5 @@
 <template>
-  <div class="event_item" @click="$router.push('/detail/'+data.id)">
+  <div class="event_item" @click="$router.push('/detail/'+data.id)" v-if="data.fields.Visibility === 'True'">
     <div class="event_item_left">
         <div class="image" v-bind:style="{ 'background-image': 'url(' + data.fields.Illustration[0].url + ')' }"></div>
         
@@ -29,6 +29,7 @@ export default {
     }
   },
   mounted(){
+
     var date = new Date(this.data.fields.Date)
     this.data.fields.Date = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()
   },
