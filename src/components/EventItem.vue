@@ -6,7 +6,7 @@
         <p>
           <span id="event_name">{{data.fields.Name}}</span><br>
           {{data.fields.Select}}<br>
-          {{data.fields.Date}}
+          {{date_event}}
         </p>
     </div>
     <div class="event_item_right">
@@ -25,7 +25,7 @@ export default {
   },
   data(){
     return {
-      
+      date_event:""
     }
   },
   mounted(){
@@ -46,6 +46,7 @@ export default {
     else if(mont === 10){month_final = "Novembre"}
     else if(mont === 11){month_final = "Décembre"}
     this.data.fields.Date = date.getDate()+" "+month_final+" "+date.getFullYear()
+    this.date_event = date.getDate()+" "+month_final+" "+date.getFullYear()
   },
 
   methods:{

@@ -6,7 +6,7 @@
     </header>
     <main>
       <ul class="filter">
-        <li id="li_a" class="filter_li active" v-on:click="toogleActive('li_a'); filterby('Date', 'desc')">Date</li>
+        <li id="li_a" class="filter_li active" v-on:click="toogleActive('li_a'); filterby('Date', 'asc')">Date</li>
         <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b'); filterby('Select' , 'desc')">Thème</li>
         <li id="li_c" class="filter_li" v-on:click="toogleActive('li_c'); filterby('Nombre_inscriptions', 'asc')">Places</li>
       </ul>
@@ -59,7 +59,7 @@ export default {
   },
 
   mounted(){
-    this.filterby("Date", "desc")
+    this.filterby("Date", "asc")
   },
   methods:{
     toogleActive(id){
