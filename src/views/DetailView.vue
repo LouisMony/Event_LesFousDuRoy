@@ -74,9 +74,7 @@ export default {
   methods:{
     async getDetail(){
       var _this = this
-      await http.get('Evenements/'+this.page_id, {
-          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-      })
+      await http.get('Evenements/'+this.page_id)
       .then(function (response) {
         _this.event = response.data
         if(_this.event.fields.Nombre_inscriptions === _this.event.fields.Nombre_Participants){
@@ -88,9 +86,7 @@ export default {
 
     async checkInscription(){
       var _this = this
-      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'",{Statut}="Inscrit" )',{
-          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-      })
+      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'",{Statut}="Inscrit" )')
       .then(async function (response) {      
         if (response.data.records.length === 1) {
           _this.incriptionId = response.data.records[0].id
@@ -101,9 +97,7 @@ export default {
         }
         else{
           
-          await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+_this.page_id+'",{Statut}="List")',{
-              headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-          })
+          await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+_this.page_id+'",{Statut}="List")')
           .then(function (response) { 
             if (response.data.records.length === 1) {
               _this.incriptionId = response.data.records[0].id
@@ -149,7 +143,7 @@ export default {
                     }
                 }
             ]
-        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        })
         .then(function (response) {
             _this.checkInscription()
             _this.UpdateEvent(true)
@@ -175,7 +169,7 @@ export default {
                     }
                 }
             ]
-        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        })
         .then(function (response) {
             _this.checkInscription()
             _this.UpdateEvent(true)
@@ -186,9 +180,7 @@ export default {
       //DESINSCRIPTIONS
       else if(this.currentAction === "Desinscription"){
         console.log("DESINSCRIPTION");
-        await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'',{
-            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-        })
+        await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'')
         .then(function (response) {
           _this.checkInscription()
           _this.UpdateEvent(false)
@@ -217,7 +209,7 @@ export default {
                     }
                 }
             ]
-        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        })
         .then(function (response) {
           _this.event.fields.Nombre_inscriptions = new_number
         })   
@@ -235,7 +227,7 @@ export default {
                     }
                 }
             ]
-        }, {headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'}})
+        })
         .then(function (response) {
           _this.event.fields.Attente = new_number
         }) 

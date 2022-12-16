@@ -78,15 +78,12 @@ export default {
     },
 
     async filterby(param, sens){
-      var _this = this
-      var url = 
-      await http.get('Evenements?sort%5B0%5D%5Bfield%5D='+param+'&sort%5B0%5D%5Bdirection%5D='+sens+'', {
-          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
+
+      await http.get('Evenements?sort%5B0%5D%5Bfield%5D='+param+'&sort%5B0%5D%5Bdirection%5D='+sens+'')
+      .then((response) => {
+        this.event = response.data.records
       })
-      .then(function (response) {
-        _this.event = response.data.records
-      })
-      .catch(function (error) {
+      .catch((error)=> {
         console.log(error);
       });
     },

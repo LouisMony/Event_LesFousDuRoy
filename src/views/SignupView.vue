@@ -78,14 +78,10 @@ export default {
         this.button_state = "Patientez"
         var _this = this
         if(this.password === this.passwordconf){
-            await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))', {
-            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-            })
+            await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
             .then(function (response) {
                 if(response.data.records.length === 0){
-                    http.get('Users?filterByFormula=AND(SEARCH("'+_this.tel+'", {Telephone}))', {
-                    headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-                    })
+                    http.get('Users?filterByFormula=AND(SEARCH("'+_this.tel+'", {Telephone}))')
                     .then(function (response) {
                         if(response.data.records.length === 0){ 
                             _this.AddUser()
@@ -129,9 +125,6 @@ export default {
                     }
                 }
             ]
-        }, 
-        {
-            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
         })
         .then(function (response) {
             console.log(response.data)

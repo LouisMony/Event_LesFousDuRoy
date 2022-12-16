@@ -45,9 +45,7 @@ export default {
   methods:{
     async GetEvents(){
       var _this = this
-      await http.get('Evenements', {
-          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-      })
+      await http.get('Evenements')
       .then(function (response) {
         _this.event = response.data.records
         _this.getInscription()
@@ -57,9 +55,7 @@ export default {
     async getInscription(){
       
       var _this = this
-      await http.get('Inscriptions?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))', {
-          headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-      })
+      await http.get('Inscriptions?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
       .then(function (response) {
         _this.inscription_arr = response.data.records;
         _this.filterInscriptions()

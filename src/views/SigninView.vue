@@ -39,9 +39,7 @@ export default {
   methods:{
     async submitForm(){
         var _this = this
-        await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))', {
-            headers: {'Authorization': 'Bearer key1knTuZ7MwzCLsY'},
-        })
+        await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
         .then(function (response) {
            if (response.data.records[0].fields.Password === _this.password){
             localStorage.setItem('state', 'ACTIVE')
