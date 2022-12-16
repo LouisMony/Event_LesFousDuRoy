@@ -31,7 +31,21 @@ export default {
   mounted(){
 
     var date = new Date(this.data.fields.Date)
-    this.data.fields.Date = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()
+    var mont = date.getMonth();
+    var month_final = ""
+    if(mont === 0){month_final = "Janvier"}
+    else if(mont === 1){month_final = "Février"}
+    else if(mont === 2){month_final = "Mars"}
+    else if(mont === 3){month_final = "Avril"}
+    else if(mont === 4){month_final = "Mai"}
+    else if(mont === 5){month_final = "Juin"}
+    else if(mont === 6){month_final = "Juillet"}
+    else if(mont === 7){month_final = "Aout"}
+    else if(mont === 8){month_final = "Septembre"}
+    else if(mont === 9){month_final = "Octobre"}
+    else if(mont === 10){month_final = "Novembre"}
+    else if(mont === 11){month_final = "Décembre"}
+    this.data.fields.Date = date.getDate()+" "+month_final+" "+date.getFullYear()
   },
 
   methods:{
