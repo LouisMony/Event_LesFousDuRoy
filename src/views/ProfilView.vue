@@ -13,6 +13,9 @@
     <div class="event_list" v-if="display">
       <EventItem v-for="(item, index) in event" :data="item" :key="index" />
     </div>
+    <div v-else class="loading">
+        <div class="lds-dual-ring"></div>
+      </div>
   </div>
 </template>
 

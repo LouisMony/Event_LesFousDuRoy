@@ -7,7 +7,7 @@
       <div class="detail_content_top">
         <h1>{{event.fields.Name}}</h1>
         <h2>{{event.fields.Select}}</h2>
-        <hr>
+        <div class="line"></div>
         <div class="detail_content_carac">
           <div class="detail_content_carac_line">
             <div>
@@ -33,7 +33,9 @@
         <p><span>Details :</span><br>Prix d'entrée : {{event.fields.Prix}} € <br>{{event.fields.Remarque}}</p>
       </div>
       <div class="detail_content_bottom">
-        <span v-if="full">Cet événement est actuellement complet, vous pouvez cependant vous inscrire dans la file d’attente : en cas de désistement d’un participant vous pourriez être recontacter par notre équipe pour pouvoir participer.</span>
+        <p v-if="full">
+          Cet événement est actuellement complet, vous pouvez cependant vous inscrire dans la file d'attente : en cas de désistement d'un participant vous pourriez être recontacter par notre équipe pour pouvoir participer.
+          </p>
         <button v-bind:class="{ scnd_state: second_class }" @click="modal=true">{{button_text}}</button>
       </div>
 
@@ -62,7 +64,7 @@ export default {
       modal: false,
       second_class: false,
       warning_text: "Il sera toujours possible de vous désinscrire par la suite.",
-      button_text: "M’inscrire à cet évènement",
+      button_text: "Chargement ...",
       incriptionId : "",
       currentAction: "",
       full: false
@@ -309,6 +311,13 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    img{
+      background: rgba(0, 0, 0, 0.275);
+      border-radius: 50%;
+      padding: 3px;
+      backdrop-filter: blur(10px);
+    }
   }
 
   .detail_content{
@@ -328,30 +337,39 @@ export default {
         color: $fontcolor;
       }
       h2{
-        margin: 0 0 15px 0;
+        margin: 0 0 10px 0;
         font-weight: 500;
         font-size: 20px;
         color:$fontcolor
       }
-      hr{
-        border: 0.5px solid $hr
+      .line{
+        border-top: 1px solid $hr ;
+       
       }
+
       .detail_content_carac{
-        margin: 25px 0;
+        margin: 15px 0;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
+
         .detail_content_carac_line{
           display: flex;
           width: 100%;
+
           div{
             width: 50%;
             display: flex;
             align-items: center;
             gap:10px;
+            font-size: 14px;
+            
 
             img{
-              height: 30px;
+              height: 20px;
+              background: #ffdfdf;;
+              padding: 3px;
+              border-radius: 50%;
             }
           }
         }
@@ -360,15 +378,17 @@ export default {
         margin: 0;
         color: $fontcolor;
         text-align: justify;
+        font-size: 14px;
+
         span{
-          font-size: 14px;
           font-weight: 600;
         }
       }
     }
     .detail_content_bottom{
-      span{
+      p{
         font-weight: 400;
+        margin-bottom: 10px;
         font-size: 12px;
         text-align: justify;
         color: $rouge;

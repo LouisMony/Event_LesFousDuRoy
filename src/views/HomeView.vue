@@ -10,8 +10,10 @@
         <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b'); filterby('Select' , 'desc')">Thème</li>
         <li id="li_c" class="filter_li" v-on:click="toogleActive('li_c'); filterby('Nombre_inscriptions', 'asc')">Places</li>
       </ul>
-
-      <div class="event_list">
+      <div v-if="event === false" class="loading">
+        <div class="lds-dual-ring"></div>
+      </div>
+      <div v-else class="event_list">
         <EventItem class="event_list_item" v-for="(item, index) in event" :data="item" :key="index" />
       </div>
     </main>
@@ -31,7 +33,7 @@ export default {
   data(){
     return {
       active_id : "li_a",
-      event: [],
+      event: false,
       searchedvalue:'',
     }
   },
@@ -128,6 +130,8 @@ export default {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 155px);
+
+    
 
     ul{
       margin:25px 0;

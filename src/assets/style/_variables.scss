@@ -6,3 +6,35 @@ $hr : rgba(110, 113, 122, 0.38);
 $focus : rgb(196, 196, 196);
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .lds-dual-ring {
+      display: inline-block;
+      width: fit-content;
+      height: fit-content;
+    }
+    .lds-dual-ring:after {
+      content: " ";
+      display: block;
+      width: 25px;
+      height: 25px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 1px solid $fontcolor;
+      border-color: $fontcolor transparent $fontcolor transparent;
+      animation: lds-dual-ring 1.2s linear infinite;
+    }
+    @keyframes lds-dual-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }

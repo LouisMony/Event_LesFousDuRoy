@@ -7,6 +7,7 @@ import Signin from '../views/SigninView.vue'
 import Signup from '../views/SignupView.vue'
 import UpdatephtotView from '../views/UpdatephtotView.vue'
 import OptionsView from '../views/OptionsView.vue'
+import UpdateProfilView from '../views/UpdateProfilView.vue'
 
 
 Vue.use(VueRouter)
@@ -81,6 +82,18 @@ const routes = [
       }
     },
     component: UpdatephtotView
+  },
+  {
+    path: '/update-profil',
+    name: 'update-profil',
+    beforeEnter: (to, from, next) => {
+      if(window.localStorage.getItem('state') === 'ACTIVE'){
+        next()
+      }else{
+        router.push('/me-connecter')
+      }
+    },
+    component: UpdateProfilView
   }
 ]
 
