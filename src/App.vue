@@ -26,8 +26,17 @@ export default {
         "https://www.unpkg.com/css-houdini-squircle@0.1.3/squircle.min.js"
       );
     }
+    this.fixheight()
   },
   methods:{
+    fixheight(){
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      window.addEventListener('resize', () => {
+          let vh = window.innerHeight * 0.01;
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
+      });
+    }
   } 
 }
 </script>
@@ -54,7 +63,10 @@ export default {
 body {
   overflow-x: hidden;
   overflow-y: auto;
+
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+
   width: 100%;
   box-sizing: border-box;
   margin: 0;
