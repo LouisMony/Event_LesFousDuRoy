@@ -46,6 +46,7 @@ export default {
             localStorage.setItem('username', response.data.records[0].fields.Username)
             localStorage.setItem('mail', response.data.records[0].fields.Adresse_mail)
             localStorage.setItem('tel', response.data.records[0].fields.Telephone)
+            localStorage.setItem('iduser', response.data.records[0].id)
             _this.$router.push('/')
            }
            else{

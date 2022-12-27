@@ -1,6 +1,6 @@
 <template>
   <div class="options">
-    <div>
+    <div @click="$router.replace({ path: '/update-profil' })">
       Modifier mon profil
       <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
     </div>
@@ -10,7 +10,7 @@
     </div>
     <div id="option_contact" v-on:click="Contact()" v-bind:class="{ active: showContact }">
       <div class="option_contact_first">
-        Nous contactez
+        Nous contacter
         <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
       </div>
       <div v-if="showContact" class="option_contact_sncd">

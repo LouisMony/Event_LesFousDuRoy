@@ -34,6 +34,7 @@ export default {
       activemodal: false,
       username: localStorage.getItem('username'),
       mail: localStorage.getItem('mail'),
+      iduser : localStorage.getItem('iduser'),
       event:"",
       inscription_arr:"", 
       display: false
@@ -56,9 +57,8 @@ export default {
     },
 
     async getInscription(){
-      
       var _this = this
-      await http.get('Inscriptions?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
+      await http.get('Inscriptions?filterByFormula=AND(SEARCH("'+this.iduser+'", {User_id}))')
       .then(function (response) {
         _this.inscription_arr = response.data.records;
         _this.filterInscriptions()
@@ -66,7 +66,6 @@ export default {
     },
 
     async filterInscriptions(){
-      console.log('coucou');
       this.event = this.event.filter(({id}) =>
         this.inscription_arr.some(exclude => exclude.fields.Events_id === id)
       );

@@ -193,7 +193,6 @@ export default {
     },
 
     async UpdateEvent(action){
-      console.log('tsrat');
       var _this = this
       if(action === true && this.full === false){var new_number = this.event.fields.Nombre_inscriptions + 1}
       else if(action === true && this.full === true){var new_number = this.event.fields.Attente + 1}

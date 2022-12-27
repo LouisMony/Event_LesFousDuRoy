@@ -14,7 +14,7 @@
         <label for="password">Mot de passe</label><br>
         <input type="password" name="password" v-model="password" required/><br>
 
-        <label for="password_conf">Mot de passe</label><br>
+        <label for="password_conf">Confirmer le mot de passe</label><br>
         <input type="password" name="password_conf" v-model="passwordconf" required/><br>
 
         <label for="photo_profil">Photo de profil</label><br>
@@ -87,7 +87,7 @@ export default {
                             _this.AddUser()
                         }
                         else{
-                            _this.error_content = "Ce numéro de téléphone est déja utilisée."
+                            _this.error_content = "Ce numéro de téléphone est déja utilisé."
                             _this.modal_error = true
                             _this.button_state = "Créer mon compte"
                         }
