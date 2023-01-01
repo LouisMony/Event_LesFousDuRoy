@@ -14,10 +14,14 @@
     <p>Mes prochains évènements :</p>
     <div class="event_list" v-if="display">
       <EventItem v-for="(item, index) in event" :data="item" :key="index" />
+      <div class="event_list_warning" v-if="display_warning">
+        Vous n'êtes inscrit à aucun évènement pour le moment. Consultez la liste de tous les évènements à venir dans l'onglet "Events".
+      </div>
     </div>
     <div v-else class="loading">
         <div class="lds-dual-ring"></div>
-      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -40,7 +44,8 @@ export default {
       photo: "img/photo_profil"+localStorage.getItem('photo'),
       event:"",
       inscription_arr:"", 
-      display: false
+      display: false,
+      display_warning: false
     }
   },
 
@@ -69,10 +74,14 @@ export default {
     },
 
     async filterInscriptions(){
+      
       this.event = this.event.filter(({id}) =>
         this.inscription_arr.some(exclude => exclude.fields.Events_id === id)
       );
       this.display = true
+      if(this.inscription_arr.length === 0){
+        this.display_warning = true
+      }
     }
   } 
 }
@@ -163,5 +172,9 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 15px;
+
+      .event_list_warning{
+        font-size: 12px;
+      }
     }
 </style>
