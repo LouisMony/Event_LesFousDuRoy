@@ -23,7 +23,7 @@
 
       </div>
     </div>
-    <div>
+    <div v-on:click="$router.replace({ path: '/utilisation-des-donnees'})">
       Utilisation des données
       <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
     </div>

@@ -142,6 +142,7 @@ export default {
                         "Telephone": localStorage.getItem('tel'),
                         "Statut": "Inscrit",
                         "Events_id" : this.$route.params.id,
+                        "User_id": localStorage.getItem('iduser'),
                     }
                 }
             ]
@@ -168,6 +169,7 @@ export default {
                         "Statut": "List",
                         "List_number": this.event.fields.Attente + 1,
                         "Events_id" : this.$route.params.id,
+                        "User_id": localStorage.getItem('iduser'),
                     }
                 }
             ]

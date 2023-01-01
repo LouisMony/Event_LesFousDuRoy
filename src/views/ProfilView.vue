@@ -1,7 +1,9 @@
 <template>
   <div class="profil">
     <div class="profil_top">
-        <div class="photo_profil"></div>
+        <div class="photo_profil">
+          <img :src="photo" alt="Image de profil">
+        </div>
         <div class="profil_info">
           <h1>{{username}}</h1>
           <span class="mail">{{mail}}</span><br>
@@ -35,6 +37,7 @@ export default {
       username: localStorage.getItem('username'),
       mail: localStorage.getItem('mail'),
       iduser : localStorage.getItem('iduser'),
+      photo: "img/photo_profil"+localStorage.getItem('photo'),
       event:"",
       inscription_arr:"", 
       display: false
@@ -119,10 +122,14 @@ export default {
           aspect-ratio: 1/1;
           margin: 0;
           border-radius: 50%;
-          background-image: url("@/assets/img/bg_username.png");
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+
+          img{
+            height: 100%;
+          }
       }
 
       .profil_info{

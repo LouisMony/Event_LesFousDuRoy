@@ -17,14 +17,6 @@
         <label for="password_conf">Confirmer le mot de passe</label><br>
         <input type="password" name="password_conf" v-model="passwordconf" required/><br>
 
-        <label for="photo_profil">Photo de profil</label><br>
-        <div class="photo_list">
-            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
-            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
-            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
-            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
-        </div>
-
         <span class="error" v-if="modal_error">{{error_content}}</span><br>
 
         <button>{{button_state}}</button>
@@ -43,7 +35,6 @@ export default {
   },
   data(){
     return {
-        images: [],
         username:"",
         mail:"",
         tel:"",
@@ -51,27 +42,38 @@ export default {
         passwordconf:"",
         modal_error: false,
         error_content : "Une erreur est survenue, réessayer.",
-        button_state: "Créer mon compte"
+        button_state: "Créer mon compte",
+        images: [],
     }
   },
   mounted(){
     this.countFile(require.context('@/assets/img/photo_profil/', true, /\.png$/))
   },
   methods:{
-    SelectPhoto(str){
-        const options = Array.from(document.querySelectorAll('.photo_list_item'))
-        options.forEach(item => {
-            if(item.id === "photo_list_item_"+str){
-                item.classList.add('active')
-            }
-            else{
-                item.classList.remove('active')
-            }
-        })
+    // SelectPhoto(str){
+    //     const options = Array.from(document.querySelectorAll('.photo_list_item'))
+    //     options.forEach(item => {
+    //         if(item.id === "photo_list_item_"+str){
+    //             item.classList.add('active')
+    //         }
+    //         else{
+    //             item.classList.remove('active')
+    //         }
+    //     })
+    // },
+    countFile(r){
+        var id = 0
+        r.keys().forEach(key => {
+            id++
+            const url_pp = key.substring(1)+"";
+            (this.images.push(url_pp))
+        });      
     },
 
-    countFile(r){
-        r.keys().forEach(key => (this.images.push({ Url: key })));
+    getRandomItem(arr) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        const item = arr[randomIndex];
+        return item;
     },
 
     async Verif(){
@@ -113,6 +115,7 @@ export default {
 
     async AddUser(){
         var _this = this
+        var photo = this.getRandomItem(this.images);
         await http.post('Users', 
         {
             "records": [
@@ -121,7 +124,8 @@ export default {
                         "Password": this.password,
                         "Adresse_mail": this.mail,
                         "Username": this.username,
-                        "Telephone": this.tel
+                        "Telephone": this.tel,
+                        "Photo_Profil": photo
                     }
                 }
             ]
@@ -132,6 +136,7 @@ export default {
             localStorage.setItem('username', _this.username)
             localStorage.setItem('mail', _this.mail)
             localStorage.setItem('tel', _this.tel)
+            localStorage.setItem('photo', photo)
             _this.$router.push('/')
             _this.button_state = "Créer mon compte"
         })

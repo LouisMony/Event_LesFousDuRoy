@@ -8,6 +8,7 @@ import Signup from '../views/SignupView.vue'
 import UpdatephtotView from '../views/UpdatephtotView.vue'
 import OptionsView from '../views/OptionsView.vue'
 import UpdateProfilView from '../views/UpdateProfilView.vue'
+import DataPrivacyView from '../views/DataPrivacyView.vue'
 
 
 Vue.use(VueRouter)
@@ -94,6 +95,11 @@ const routes = [
       }
     },
     component: UpdateProfilView
+  },
+  {
+    path: '/utilisation-des-donnees',
+    name: 'utilisation-des-donnees',
+    component: DataPrivacyView
   }
 ]
 

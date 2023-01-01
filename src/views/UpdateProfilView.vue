@@ -22,15 +22,7 @@
 
         <label for="password_conf">Confirmer le mot de passe</label><br>
         <input type="password" name="password_conf" v-model="passwordconf" required/><br>
-
-        <label for="photo_profil">Photo de profil</label><br>
-        <div class="photo_list">
-            <div @click="SelectPhoto('1')" id="photo_list_item_1" class="photo_list_item active"></div>
-            <div @click="SelectPhoto('2')" id="photo_list_item_2" class="photo_list_item"></div>
-            <div @click="SelectPhoto('3')" id="photo_list_item_3" class="photo_list_item"></div>
-            <div @click="SelectPhoto('4')" id="photo_list_item_4" class="photo_list_item"></div>
-        </div>
-
+        
         <span class="error" v-if="modal_error">{{error_content}}</span><br>
 
         <button>{{button_state}}</button>
@@ -63,10 +55,6 @@ export default {
   },
 
   methods:{
-    SelectPhoto(param){
-      console.log(param)
-    },
-
     async Verif(){
         this.button_state = "Patientez"
         var _this = this
