@@ -136,7 +136,6 @@ export default {
 
             .active{
                 position: relative;
-                border: 1px solid #FFFFFF;
                 
                 img{
                     filter: brightness(50%);

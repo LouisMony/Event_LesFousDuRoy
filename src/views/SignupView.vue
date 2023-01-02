@@ -137,6 +137,7 @@ export default {
             localStorage.setItem('mail', _this.mail)
             localStorage.setItem('tel', _this.tel)
             localStorage.setItem('photo', photo)
+            localStorage.setItem('iduser', response.data.records[0].id)
             _this.$router.push('/')
             _this.button_state = "Créer mon compte"
         })
