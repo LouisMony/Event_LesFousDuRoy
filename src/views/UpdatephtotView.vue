@@ -10,17 +10,18 @@
 
     <div class="updtatephoto__main">
         <div class="photo_list">
-            <div v-for="(item, index) in images" v-bind:id="item.id" class="photo_list_item" :key="index">
-                <img :src="item.Url" alt="">
+            <div v-for="(item, index) in images" v-bind:id="item.id" class="photo_list_item" :key="index" v-on:click="selectPhoto(item.Url, item.id)">
+                <img :src="item.Url" alt="Image de profil">
             </div>
         </div>
         
-        <button>Sauvegarder</button>
+        <button v-on:click="updatePhoto()">Sauvegarder</button>
     </div>
   </div>
 </template>
 
 <script>
+import {http} from "../assets/js/http-common.js"
 
 export default {
   name: 'Signin',
@@ -29,11 +30,11 @@ export default {
   data(){
     return {
         images: [],
+        selectedphoto: localStorage.getItem('photo'),
     }
   },
   mounted(){
     this.countFile(require.context('@/assets/img/photo_profil/', true, /\.png$/))
-    
   },
   methods:{
     countFile(r){
@@ -45,6 +46,41 @@ export default {
             (this.images.push({ Url: url_pp, id : id_name}))
         });      
     },
+
+    selectPhoto(url, id_div){
+        this.selectedphoto = url.slice(16)
+
+        const options = Array.from(document.querySelectorAll('.photo_list_item'))
+        options.forEach(item => {
+            if(item.id === id_div){
+                item.classList.add('active')
+            }
+            else{
+                item.classList.remove('active')
+            }
+        })
+    },
+
+    async updatePhoto(){
+        var _this = this
+        await http.patch('Users', 
+        {
+            "records": [
+                {
+                    "id": localStorage.getItem('iduser'),
+                    "fields": {
+                        "Photo_Profil": this.selectedphoto,
+                    }
+                }
+            ]
+        })
+        .then(function (response) {
+            console.log(response.data)
+            localStorage.setItem('photo', _this.selectedphoto)
+            _this.$router.push('/options')
+        })   
+
+    }
   } 
 }
 </script>
@@ -98,16 +134,22 @@ export default {
             .active{
                 position: relative;
                 border: 1px solid #FFFFFF;
-                filter: brightness(50%);
-
-                &::before{
+                
+                img{
+                    filter: brightness(50%);
+                    z-index: 1;
+                }
+                
+                &::after{
                     content: 'Sélectionné';
                     font-size: 12px;
+                    color: white;
                     position: absolute;
                     transform: translate(-50%, -50%);
                     top: 50%;
                     left: 50%;
                     border-radius: 50%;
+                    z-index: 2;
                 }
             }
         }
