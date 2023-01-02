@@ -15,7 +15,7 @@
             </div>
         </div>
         
-        <button v-on:click="updatePhoto()">Sauvegarder</button>
+        <button v-on:click="updatePhoto()">{{text_button}}</button>
     </div>
   </div>
 </template>
@@ -31,6 +31,7 @@ export default {
     return {
         images: [],
         selectedphoto: localStorage.getItem('photo'),
+        text_button: "Sauvegarder"
     }
   },
   mounted(){
@@ -62,6 +63,7 @@ export default {
     },
 
     async updatePhoto(){
+        this.text_button = "Patientez..."
         var _this = this
         await http.patch('Users', 
         {
@@ -99,6 +101,7 @@ export default {
     }
 
     .updtatephoto__main{
+        height: calc(100vh - 94px);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -116,8 +119,8 @@ export default {
             .photo_list_item{
                 flex: 1 0 21%;
                 margin-bottom: 15px;
-                border: 1px solid #393939;
                 width: 20%;
+                max-width: 24%;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
                 transition: all 100ms linear;

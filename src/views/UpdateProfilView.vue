@@ -56,7 +56,7 @@ export default {
 
   methods:{
     async Verif(){
-        this.button_state = "Patientez"
+        this.button_state = "Patientez..."
         var _this = this
         if(this.password === this.passwordconf){
             await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
