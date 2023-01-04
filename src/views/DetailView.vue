@@ -12,7 +12,7 @@
           <div class="detail_content_carac_line">
             <div>
               <img src="@/assets/img/calendar.svg" alt="icône de calendrier">
-              <span>{{event.fields.Date}}</span>
+              <span>{{date_event}}</span>
             </div>
             <div>
               <img src="@/assets/img/location.svg" alt="icône de localisation">
@@ -67,7 +67,8 @@ export default {
       button_text: "Chargement ...",
       incriptionId : "",
       currentAction: "",
-      full: false
+      full: false,
+      date_event:""
     }
   },
   mounted(){
@@ -82,8 +83,29 @@ export default {
         if(_this.event.fields.Nombre_inscriptions === _this.event.fields.Nombre_Participants){
           _this.full = true
         }
+        _this.RewriteDate()
         _this.checkInscription()
       })
+    },
+
+    RewriteDate(){
+      var date = new Date(this.event.fields.Date)
+      var mont = date.getMonth();
+      var month_final = ""
+      if(mont === 0){month_final = "Janvier"}
+      else if(mont === 1){month_final = "Février"}
+      else if(mont === 2){month_final = "Mars"}
+      else if(mont === 3){month_final = "Avril"}
+      else if(mont === 4){month_final = "Mai"}
+      else if(mont === 5){month_final = "Juin"}
+      else if(mont === 6){month_final = "Juillet"}
+      else if(mont === 7){month_final = "Aout"}
+      else if(mont === 8){month_final = "Septembre"}
+      else if(mont === 9){month_final = "Octobre"}
+      else if(mont === 10){month_final = "Novembre"}
+      else if(mont === 11){month_final = "Décembre"}
+      this.event.fields.Date = date.getDate()+" "+month_final+" "+date.getFullYear()
+      this.date_event = date.getDate()+" "+month_final+" "+date.getFullYear()
     },
 
     async checkInscription(){
@@ -130,7 +152,6 @@ export default {
       var _this = this
       //INSCRIPTIONS
       if(this.currentAction === "Inscription" && this.full ===false){
-        console.log("INSCRIPTION");
         await http.post('Inscriptions', 
         {
             "records": [
@@ -156,7 +177,6 @@ export default {
 
       //INSCRIPTIONS FILL D'ATTENTE
       else if(this.currentAction === "Inscription" && this.full === true){
-        console.log("INSCRIPTION FILE ");
         await http.post('Inscriptions', 
         {
             "records": [
@@ -183,7 +203,6 @@ export default {
 
       //DESINSCRIPTIONS
       else if(this.currentAction === "Desinscription"){
-        console.log("DESINSCRIPTION");
         await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'')
         .then(function (response) {
           _this.checkInscription()
@@ -219,7 +238,6 @@ export default {
       }
       
       else if(this.full === true){
-        console.log('new ' + new_number);
         await http.patch('Evenements', 
         {
             "records": [
