@@ -36,8 +36,8 @@
       <div class="option_contact_sncd" v-if="ShowconfirmDisconnect">
         <div class="ligne"></div>
         <div class="option_contact_sncd_choice">
-          <button @click="Disconnect()">Confirmer</button>
-          <button class="retour">Retour</button>
+          <button class="main_button" @click="Disconnect()">Confirmer</button>
+          <button class="retour main_button">Retour</button>
         </div>
       </div>
     </div>
@@ -173,14 +173,6 @@ export default {
           button{
             width: 45%;
             height: 50px;
-            font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $rouge;
-            color: white;
-            font-weight: 500;
-            font-size: 16px;
-            border: none;
-            outline:none;
-            border-radius: 5px;
             margin: 10px 0 10px 0;
           }
 

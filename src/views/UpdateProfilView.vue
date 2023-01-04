@@ -26,7 +26,7 @@
         
         <span class="error" v-if="modal_error">{{error_content}}</span><br>
 
-        <button>{{button_state}}</button>
+        <button class="main_button">{{button_state}}</button>
     </form>
   </div>
 </template>
@@ -172,76 +172,9 @@ export default {
             }
         }
 
-        .photo_list{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin:10px 0 20px 0;
-
-            .photo_list_item{
-                background-color: black;
-                border: 1px solid $focus;
-                width: 20%;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-                transition: all 100ms linear;
-                
-
-                &:nth-child(1){
-                    background: url('@/assets/img/photo_profil/Jace.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-                &:nth-child(2){
-                    background: url('@/assets/img/photo_profil/Nissa.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-                &:nth-child(3){
-                    background: url('@/assets/img/photo_profil/Chandra.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-                &:nth-child(4){
-                    background: url('@/assets/img/photo_profil/Liliana.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-            }
-
-            .active{
-                position: relative;
-                border: 1px solid #FFFFFF;
-                filter: brightness(50%);
-
-                &::before{
-                    content: 'Sélectionné';
-                    color: white;
-                    font-size: 12px;
-                    position: absolute;
-                    transform: translate(-50%, -50%);
-                    top: 50%;
-                    left: 50%;
-                    border-radius: 50%;
-                }
-            }
-        }
-
         button{
             width: 100%;
             height: 50px;
-            font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $rouge;
-            color: white;
-            font-weight: 500;
-            font-size: 16px;
-            border: none;
-            outline:none;
-            border-radius: 5px;
             margin: 0px 0 25px 0;
         }
 

@@ -11,7 +11,7 @@
 
         <span class="error" v-if="modal_error">Adresse email ou mot de passe invalide.<br></span>
 
-        <button>Suivant</button>
+        <button class="main_button">Suivant</button>
 
         <router-link class="redirect" to="creer-un-compte">Je n'ai pas encore de compte</router-link>
     </form>
@@ -130,15 +130,7 @@ export default {
         button{
             width: 100%;
             height: 50px;
-            font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $rouge;
-            color: white;
-            font-weight: 500;
-            font-size: 16px;
-            border: none;
-            outline:none;
-            border-radius: 5px;
-            margin: 10px 0 25px 0;
+            
         }
 
         .redirect{

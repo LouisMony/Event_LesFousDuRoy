@@ -36,15 +36,15 @@
         <p v-if="full">
           Cet événement est actuellement complet, vous pouvez cependant vous inscrire dans la file d'attente : en cas de désistement d'un participant vous pourriez être recontacter par notre équipe pour pouvoir participer.
           </p>
-        <button v-bind:class="{ scnd_state: second_class }" @click="modal=true">{{button_text}}</button>
+        <button v-bind:class="{ scnd_state: second_class }" class="main_button" @click="modal=true">{{button_text}}</button>
       </div>
 
       <div v-if="modal" class="detail_modal">
         <div class="detail_modal_box">
           <span>ATTENTION</span>
           <p>{{warning_text}}</p>
-          <button @click="modal=false" id="first">Retour</button>
-          <button @click="Action()">Confirmer</button>
+          <button class="main_button" @click="modal=false" id="first">Retour</button>
+          <button class="main_button" @click="Action()">Confirmer</button>
         </div>
       </div>
       
@@ -307,14 +307,6 @@ export default {
       button{
         width: 100%;
         height: 60px;
-        font-family: Poppins, Helvetica, Arial, sans-serif;
-        background-color: $rouge;
-        color: white;
-        font-weight: 600;
-        font-size: 16px;
-        border: none;
-        outline:none;
-        border-radius: 10px;
       }
 
       #first{
@@ -415,14 +407,6 @@ export default {
       button{
         width: 100%;
         height: 65px;
-        font-family: Poppins, Helvetica, Arial, sans-serif;
-        background-color: $rouge;
-        color: white;
-        font-weight: 600;
-        font-size: 16px;
-        border: none;
-        outline:none;
-        border-radius: 10px;
       }
 
       .scnd_state{

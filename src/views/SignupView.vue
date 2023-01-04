@@ -20,7 +20,7 @@
 
         <span class="error" v-if="modal_error">{{error_content}}</span><br>
 
-        <button>{{button_state}}</button>
+        <button class="main_button">{{button_state}}</button>
 
         <router-link class="redirect" to="me-connecter">J'ai déja un compte.</router-link>
     </form>
@@ -199,15 +199,6 @@ export default {
         button{
             width: 100%;
             height: 50px;
-            font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $rouge;
-            color: white;
-            font-weight: 500;
-            font-size: 16px;
-            border: none;
-            outline:none;
-            border-radius: 5px;
-            margin: 0px 0 25px 0;
         }
 
         .redirect{

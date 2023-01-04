@@ -7,6 +7,17 @@ $focus : rgb(196, 196, 196);
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
 
+.main_button{
+  font-family: Poppins, Helvetica, Arial, sans-serif;
+  background-color: $rouge;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  outline:none;
+  border-radius: 10px;
+}
+
 .loading{
   display: flex;
   justify-content: center;

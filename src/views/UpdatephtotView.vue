@@ -15,7 +15,7 @@
             </div>
         </div>
         
-        <button v-on:click="updatePhoto()">{{text_button}}</button>
+        <button class="main_button" v-on:click="updatePhoto()">{{text_button}}</button>
     </div>
   </div>
 </template>
@@ -104,7 +104,7 @@ export default {
     }
 
     .updtatephoto__main{
-        height: calc(100vh - 94px);
+        height: calc(100vh - 135px);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -162,15 +162,7 @@ export default {
         button{
             width: 100%;
             height: 55px;
-            font-family: Poppins, Helvetica, Arial, sans-serif;
-            background-color: $rouge;
-            color: white;
-            font-weight: 500;
-            font-size: 16px;
-            border: none;
-            outline:none;
-            border-radius: 5px;
-            margin: 25px 0 25px 0;
+            margin: 25px 0 0px 0;
         }
     }
 }
