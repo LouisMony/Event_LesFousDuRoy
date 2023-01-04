@@ -7,6 +7,7 @@
       </svg>
     </div>
     <h1>Modifier mon profil</h1>
+    <hr>
     <form @submit.prevent="Verif">
         <label for="username">Nom d'utilisateur</label><br>
         <input type="text" name="username" v-model="username" required /><br>
@@ -129,13 +130,18 @@ export default {
 .signup{
     box-sizing: border-box;
     padding: 15px;
+
+    hr{
+        border-top: 1px solid $hr ;
+    }
     h1{
-        margin: 0 auto 15px auto;
+        margin: 10px auto 10px auto;
         font-weight: 600;
         font-size: 24px;
     }
 
     form{
+        margin-top: 15px;
         .error{
             color: $rouge;
             font-size: 12px;
@@ -145,7 +151,7 @@ export default {
             font-weight: 400;
             font-size: 14px;
             color:$fontcolor;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         input{

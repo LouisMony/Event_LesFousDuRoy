@@ -2,7 +2,7 @@
   <div class="signin">
     <form @submit.prevent="submitForm">
         <h1>Me connecter</h1>
-
+        <hr>
         <label for="mail">Adresse email</label><br>
         <input type="text" name="mail" v-model="mail"/><br>
 
@@ -74,6 +74,9 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    hr{
+        border-top: 1px solid $hr ;
+    }
     
     .anim_logo{
         height: 100%;
@@ -95,7 +98,7 @@ export default {
         }
 
         h1{
-            margin: 0 auto 15px auto;
+            margin: 0 auto 10px auto;
             font-weight: 600;
             font-size: 24px;
         }
@@ -126,7 +129,7 @@ export default {
 
         button{
             width: 100%;
-            height: 40px;
+            height: 50px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
             background-color: $rouge;
             color: white;
@@ -140,7 +143,7 @@ export default {
 
         .redirect{
             color:$fontcolor;
-            font-size: 14px;
+            font-size: 12px;
         }
     }
 }

@@ -7,7 +7,7 @@
         </svg>
     </div>
     <h1>Modifier ma photo de profil</h1>
-
+    <hr>
     <div class="updtatephoto__main">
         <div class="photo_list">
             <div v-for="(item, index) in images" v-bind:id="item.id" class="photo_list_item" :key="index" v-on:click="selectPhoto(item.Url, item.id)">
@@ -94,8 +94,11 @@ export default {
     box-sizing: border-box;
     padding: 15px;
     
+    hr{
+        border-top: 1px solid $hr ;
+    }
     h1{
-        margin: 0 auto 15px auto;
+        margin: 10px auto 10px auto;
         font-weight: 600;
         font-size: 24px;
     }

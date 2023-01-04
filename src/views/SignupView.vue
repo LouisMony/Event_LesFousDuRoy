@@ -1,6 +1,7 @@
 <template>
   <div class="signup">
     <h1>Créer mon compte</h1>
+    <hr>
     <form @submit.prevent="Verif">
         <label for="username">Nom d'utilisateur</label><br>
         <input type="text" name="username" v-model="username" required /><br>
@@ -155,8 +156,11 @@ export default {
 .signup{
     box-sizing: border-box;
     padding: 15px;
+    hr{
+        border-top: 1px solid $hr ;
+    }
     h1{
-        margin: 0 auto 15px auto;
+        margin: 0 auto 10px auto;
         font-weight: 600;
         font-size: 24px;
     }
@@ -192,68 +196,9 @@ export default {
             }
         }
 
-        .photo_list{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin:10px 0 20px 0;
-
-            .photo_list_item{
-                background-color: black;
-                border: 1px solid $focus;
-                width: 20%;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-                transition: all 100ms linear;
-                
-
-                &:nth-child(1){
-                    background: url('@/assets/img/photo_profil/Jace.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-                &:nth-child(2){
-                    background: url('@/assets/img/photo_profil/Nissa.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-                &:nth-child(3){
-                    background: url('@/assets/img/photo_profil/Chandra.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-                &:nth-child(4){
-                    background: url('@/assets/img/photo_profil/Liliana.png');
-                    background-position-x: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-            }
-
-            .active{
-                position: relative;
-                border: 1px solid #FFFFFF;
-                filter: brightness(50%);
-
-                &::before{
-                    content: 'Sélectionné';
-                    color: white;
-                    font-size: 12px;
-                    position: absolute;
-                    transform: translate(-50%, -50%);
-                    top: 50%;
-                    left: 50%;
-                    border-radius: 50%;
-                }
-            }
-        }
-
         button{
             width: 100%;
-            height: 40px;
+            height: 50px;
             font-family: Poppins, Helvetica, Arial, sans-serif;
             background-color: $rouge;
             color: white;
@@ -262,11 +207,11 @@ export default {
             border: none;
             outline:none;
             border-radius: 5px;
-            margin: 10px 0 25px 0;
+            margin: 0px 0 25px 0;
         }
 
         .redirect{
-            font-size: 14px;
+            font-size: 12px;
             color:$fontcolor;
         }
     }

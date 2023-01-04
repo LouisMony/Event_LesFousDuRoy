@@ -27,10 +27,22 @@
       Utilisation des données
       <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
     </div>
-    <div id="deco" @click="Disconnect()">
-      Me déconnecter
-      <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+
+    <div id="option_deco" @click="ShowDisconnect()" v-bind:class="{ active: ShowconfirmDisconnect }">
+      <div class="option_contact_first">
+        Me déconnecter
+        <img src="@/assets/img/arrow-right_scnd.svg" alt="Suivant">
+      </div>
+      <div class="option_contact_sncd" v-if="ShowconfirmDisconnect">
+        <div class="ligne"></div>
+        <div class="option_contact_sncd_choice">
+          <button @click="Disconnect()">Confirmer</button>
+          <button class="retour">Retour</button>
+        </div>
+      </div>
     </div>
+
+    
   </div>
 </template>
 
@@ -44,7 +56,8 @@ export default {
   },
   data(){
     return {
-      showContact: false
+      showContact: false,
+      ShowconfirmDisconnect: false,
     }
   },
 
@@ -52,6 +65,15 @@ export default {
 
   },
   methods:{
+    ShowDisconnect(){
+      if(this.ShowconfirmDisconnect === true){
+        this.ShowconfirmDisconnect = false
+      }
+      else{
+        this.ShowconfirmDisconnect = true
+      }
+    },
+
     Disconnect(){
       localStorage.clear()
       this.$router.push('/me-connecter')
@@ -98,7 +120,7 @@ export default {
         
     }
 
-    #option_contact{
+    #option_contact, #option_deco{
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -142,8 +164,30 @@ export default {
       }
     }
 
-    #deco{
+    #option_deco{
         color: $rouge;
+
+        .option_contact_sncd{
+          color: $fontcolor;
+
+          button{
+            width: 45%;
+            height: 50px;
+            font-family: Poppins, Helvetica, Arial, sans-serif;
+            background-color: $rouge;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            outline:none;
+            border-radius: 5px;
+            margin: 10px 0 10px 0;
+          }
+
+          .retour{
+            background-color: $fontcolor;
+          }
+        }
     }
 }
 </style>

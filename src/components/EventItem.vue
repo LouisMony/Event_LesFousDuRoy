@@ -12,7 +12,7 @@
     <div class="event_item_right">
         <img src="@/assets/img/arrow_right.svg" alt="Voir les details du tournois">
         <p v-if="data.fields.Nombre_inscriptions<data.fields.Nombre_Participants">{{data.fields.Nombre_inscriptions}} / {{data.fields.Nombre_Participants}}<br><span>Participants</span></p>
-        <p v-else id="full">Fil d'attente</p>
+        <p v-else id="full">Sur fil d'attente</p>
     </div>
   </div>
 </template>
