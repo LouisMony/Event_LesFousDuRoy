@@ -1,19 +1,22 @@
 <template>
   <div id="app">
+    <NavbarDesktop class="hideOnMobile" v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
     <transition name="slide" mode="out-in">
       <router-view/>
     </transition>
-    <Navbar v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
+    <Navbar class="showOnMobile" v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
   </div>
 </template>
 
 <script>
 
 import Navbar from '@/components/Navbar.vue'
+import NavbarDesktop from '@/components/Navbar_Desktop.vue'
 
 export default {
   components: {
     Navbar,
+    NavbarDesktop
   },
   data(){
     return {
@@ -43,6 +46,14 @@ export default {
 
 <style lang="scss">
 @import "@/assets/style/_variables.scss";
+
+.showOnMobile{
+  display: none!important;
+}
+
+.hideOnMobile{
+  //display: none;
+}
 
 .slide-enter-active,
 .slide-leave-active {
@@ -76,6 +87,13 @@ body {
 
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
-  color: $fontcolor;
+  color: $fontcolor; 
 }
+
+#app{
+    @media only screen and (min-width: 600px) {
+      display: flex;
+      align-items: center;
+    }
+  }
 </style>
