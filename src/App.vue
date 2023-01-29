@@ -48,11 +48,17 @@ export default {
 @import "@/assets/style/_variables.scss";
 
 .showOnMobile{
-  display: none!important;
+  @media only screen and (min-width: 600px) {
+    display: none!important;
+  }
+  
 }
 
 .hideOnMobile{
-  //display: none;
+  display: none;
+  @media only screen and (min-width: 600px) {
+    display: block!important;
+  }
 }
 
 .slide-enter-active,
@@ -93,7 +99,6 @@ body {
 #app{
     @media only screen and (min-width: 600px) {
       display: flex;
-      align-items: center;
     }
   }
 </style>

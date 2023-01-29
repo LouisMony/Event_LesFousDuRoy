@@ -3,7 +3,7 @@
    <ul>
     <li class="nav_li" id="first_li">
       <img src="@/assets/img/logo.svg" alt="Logo events">
-      <p>Events <br/> Les fous du Roy</p>
+      <p>EVENTS</p>
     </li>
     <li class="nav_li" v-bind:class="{ active: activeMain }" v-on:click="$router.push('/'); reloadNavbar()">
       <svg width="25" height="25" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,9 +81,9 @@ export default {
 @import "@/assets/style/_variables.scss";
 
 .navbar_desktop{
+  display: none;
   background: $scnd_bg;
   height: 75px;
-  display: flex;
   align-items: center;
   position: absolute;
   width: 100%;
@@ -135,9 +135,11 @@ export default {
     }
   }
   @media only screen and (min-width: 600px) {
+    display: flex;
       position: relative;
       height: 100vh;
       width: 20%;
+      min-width: 200px;
       max-width: 250px;
       align-items: flex-start;
       padding-top: 20px;
@@ -160,7 +162,9 @@ export default {
 
         #first_li{
           padding-bottom: 20px;
-          font-size: 16px;
+          font-size: 20px;
+          text-transform: uppercase;
+          color: $rouge;
         }
 
         .active{

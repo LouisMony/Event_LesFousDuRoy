@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header>
-      <img src="@/assets/img/logo.svg" alt="Logo events">
+      <img src="@/assets/img/logo.svg" alt="Logo events" class="showOnMobile">
       <input type="text" placeholder="Rechercher un évenement" v-model="searchedvalue">
     </header>
     <main>
@@ -101,12 +101,16 @@ export default {
 .home{
   box-sizing: border-box;
   padding: 15px 15px 0 15px;
+  width: 100%;
 
   header{
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+    @media only screen and (min-width: 600px) {
+        justify-content: right;
+    }
 
     input{
       color: $fontcolor;
@@ -120,6 +124,10 @@ export default {
       padding: 0 20px;
       background-color: $scnd_bg;
 
+      @media only screen and (min-width: 600px) {
+          width: 400px;
+      }
+
       &:focus{
         border: 1px solid $focus;
       }
@@ -130,6 +138,10 @@ export default {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 155px);
+
+    @media only screen and (min-width: 600px) {
+      height: calc(100vh - 75px);
+    }
 
     
 
