@@ -266,6 +266,11 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  @media only screen and (min-width: 600px) {
+    flex-direction: row;
+  }
 
   .detail_modal{
     position: absolute;
@@ -290,6 +295,10 @@ export default {
       box-sizing: border-box;
       padding: 20px;
       gap: 20px;
+
+      @media only screen and (min-width: 600px) {
+        width: 400px;
+      }
 
       span{
         color: $rouge;
@@ -329,6 +338,11 @@ export default {
       padding: 3px;
       backdrop-filter: blur(10px);
     }
+
+    @media only screen and (min-width: 600px) {
+      height: 100%;
+      width: 50%;
+    }
   }
 
   .detail_content{
@@ -339,6 +353,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media only screen and (min-width: 600px) {
+      justify-content: flex-start;
+      gap: 50px;
+    }
 
     .detail_content_top{
       h1{
@@ -362,11 +381,17 @@ export default {
         margin: 15px 0;
         display: flex;
         flex-direction: column;
+        @media only screen and (min-width: 600px) {
+          flex-direction: row;
+        }
         gap: 10px;
 
         .detail_content_carac_line{
           display: flex;
           width: 100%;
+          @media only screen and (min-width: 600px) {
+            width: 50%;
+          }
 
           div{
             width: 50%;
@@ -381,6 +406,10 @@ export default {
               background: #ffdfdf;;
               padding: 3px;
               border-radius: 50%;
+              @media only screen and (min-width: 600px) {
+                height: 30px;
+                opacity: 80%;
+              }
             }
           }
         }
@@ -407,6 +436,9 @@ export default {
       button{
         width: 100%;
         height: 65px;
+        @media only screen and (min-width: 600px) {
+          width: 50%;
+        }
       }
 
       .scnd_state{

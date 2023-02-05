@@ -67,6 +67,14 @@ export default {
     padding: 10px;
     display: flex;
     justify-content: space-between;
+
+    @media only screen and (min-width: 600px) {
+      cursor: pointer;
+      &:hover{
+        box-sizing: border-box;
+        border: 1px solid $focus;
+      }
+    }
     .event_item_left{
         display: flex;
         align-items: flex-start;
