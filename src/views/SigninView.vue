@@ -74,6 +74,11 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    width: 100%;
+    @media only screen and (min-width: 600px) {
+      max-width: 400px;
+      margin: auto;
+    }
     hr{
         border-top: 1px solid $hr ;
     }
@@ -88,7 +93,7 @@ export default {
 
     img{
         width: 15%;
-        max-width: 100px
+        max-width: 50px
     }
 
     form{

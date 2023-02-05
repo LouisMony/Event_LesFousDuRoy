@@ -1,4 +1,5 @@
 $rouge : #FF3A3A;
+$rouge_hover : #fb2626;
 $main_bg :#E9EFF2;
 $scnd_bg : #F9F9F9;
 $fontcolor : #222222;
@@ -15,7 +16,14 @@ $focus : rgb(196, 196, 196);
   font-size: 16px;
   border: none;
   outline:none;
-  border-radius: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  @media only screen and (min-width: 600px) {
+    transition: all 100ms linear;
+    &:hover{
+      background-color: $rouge_hover;
+    }
+  }
 }
 
 .loading{

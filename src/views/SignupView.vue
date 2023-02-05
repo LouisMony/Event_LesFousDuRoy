@@ -156,6 +156,11 @@ export default {
 .signup{
     box-sizing: border-box;
     padding: 15px;
+    width: 100%;
+    @media only screen and (min-width: 600px) {
+      max-width: 400px;
+      margin: auto;
+    }
     hr{
         border-top: 1px solid $hr ;
     }
