@@ -105,6 +105,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 70px);
+    width: 100%;
 
     .option{
       position: absolute;

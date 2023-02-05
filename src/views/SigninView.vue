@@ -135,7 +135,6 @@ export default {
         button{
             width: 100%;
             height: 50px;
-            
         }
 
         .redirect{

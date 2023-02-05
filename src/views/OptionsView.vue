@@ -112,6 +112,12 @@ export default {
         box-sizing: border-box;
         padding: 0 10px;
         background-color: $scnd_bg;
+        cursor: pointer;
+
+        @media only screen and (min-width: 600px) {
+            &:hover{
+            }
+        }
 
         img{
           height: 15px;

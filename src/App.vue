@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <NavbarDesktop class="hideOnMobile" v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
-    <transition name="slide" mode="out-in">
+    <transition v-if="mobile" name="slide" mode="out-in">
       <router-view/>
     </transition>
+    <router-view v-else/>
     <Navbar class="showOnMobile" v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
   </div>
 </template>
@@ -20,7 +21,7 @@ export default {
   },
   data(){
     return {
-      
+      mobile: false
     }
   },
   mounted(){
@@ -30,6 +31,10 @@ export default {
       );
     }
     this.fixheight()
+    if(window.innerWidth >= 600){this.mobile === false}
+    else{this.mobile=true}
+    console.log(this.mobile)
+    
   },
   methods:{
     fixheight(){

@@ -131,6 +131,9 @@ export default {
                 justify-content: center;
                 align-items: center;
                 overflow: hidden;
+                @media only screen and (min-width: 600px) {
+                    max-width: 100px;
+                }
 
                 img{
                     height: 100%;

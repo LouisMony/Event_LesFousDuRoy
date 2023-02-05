@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <div class="detail_bg" v-bind:style="{ 'background-image': 'url(' + event.fields.Illustration[0].url + ')' }">
-      <img src="@/assets/img/arrow_left.svg" alt="Retourner à la page précédente" @click="$router.go(-1)">
+      <div class="back"><img src="@/assets/img/arrow_left.svg" alt="Retourner à la page précédente" @click="$router.go(-1)"></div>
     </div>
     <div class="detail_content">
       <div class="detail_content_top">

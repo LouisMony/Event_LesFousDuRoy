@@ -58,4 +58,22 @@ $focus : rgb(196, 196, 196);
   }
 }
 
+.back{
+  @media only screen and (min-width: 600px) {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 100ms linear;
+    
+    &:hover{
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.072);
+    }
+  }
+}
+
 
