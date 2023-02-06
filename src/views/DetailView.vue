@@ -355,8 +355,8 @@ export default {
     justify-content: space-between;
 
     @media only screen and (min-width: 600px) {
-      justify-content: flex-start;
-      gap: 50px;
+      //justify-content: flex-start;
+      //gap: 50px;
     }
 
     .detail_content_top{
@@ -436,9 +436,6 @@ export default {
       button{
         width: 100%;
         height: 65px;
-        @media only screen and (min-width: 600px) {
-          width: 50%;
-        }
       }
 
       .scnd_state{

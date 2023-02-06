@@ -119,6 +119,10 @@ export default {
             gap: 15px;
             margin:10px 0 20px 0;
 
+            @media only screen and (min-width: 600px) {
+                justify-content: left;
+            }
+
             .photo_list_item{
                 flex: 1 0 21%;
                 margin-bottom: 15px;

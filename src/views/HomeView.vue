@@ -6,6 +6,7 @@
     </header>
     <main>
       <ul class="filter">
+        <li id="li_start">Filtrer par : </li>
         <li id="li_a" class="filter_li active" v-on:click="toogleActive('li_a'); filterby('Date', 'asc')">Date</li>
         <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b'); filterby('Select' , 'desc')">Thème</li>
         <li id="li_c" class="filter_li" v-on:click="toogleActive('li_c'); filterby('Nombre_inscriptions', 'asc')">Places</li>
@@ -155,11 +156,23 @@ export default {
       justify-content: center;
       gap: 40px;
 
+
       li{
         position: relative;
         padding: 0;
         margin: 0;
         font-size: 14px;
+      }
+
+      #li_start{
+        display: none;
+        @media only screen and (min-width: 600px) {
+          display: flex;
+        }
+      }
+
+      #li_a, #li_b, #li_c{
+        cursor: pointer;
       }
 
       .active{

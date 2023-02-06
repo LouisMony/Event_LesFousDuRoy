@@ -107,6 +107,10 @@ export default {
     height: calc(100vh - 70px);
     width: 100%;
 
+    @media only screen and (min-width: 600px) {
+      height: calc(100vh - 2px);
+    }
+
     .option{
       position: absolute;
       right: 15px;

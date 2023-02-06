@@ -56,7 +56,6 @@ export default {
   @media only screen and (min-width: 600px) {
     display: none!important;
   }
-  
 }
 
 .hideOnMobile{
@@ -104,6 +103,8 @@ body {
 #app{
     @media only screen and (min-width: 600px) {
       display: flex;
+      height: 100vh;
+      overflow-y: hidden;
     }
   }
 </style>
