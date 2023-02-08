@@ -44,7 +44,7 @@
           <span>ATTENTION</span>
           <p>{{warning_text}}</p>
           <button class="main_button" @click="modal=false" id="first">Retour</button>
-          <button class="main_button" @click="Action()">Confirmer</button>
+          <button class="main_button" @click="Action()">{{button_text_2}}</button>
         </div>
       </div>
       
@@ -68,7 +68,9 @@ export default {
       incriptionId : "",
       currentAction: "",
       full: false,
-      date_event:""
+      date_event:"", 
+      allreadyclick: false,
+      button_text_2:"Confirmer"
     }
   },
   mounted(){
@@ -149,68 +151,70 @@ export default {
     },
 
     async Action(){
-      var _this = this
-      //INSCRIPTIONS
-      if(this.currentAction === "Inscription" && this.full ===false){
-        await http.post('Inscriptions', 
-        {
-            "records": [
-                {
-                    "fields": {
-                        "Events_name": this.event.fields.Name,
-                        "Adresse_mail": localStorage.getItem('mail'),
-                        "Username": localStorage.getItem('username'),
-                        "Telephone": localStorage.getItem('tel'),
-                        "Statut": "Inscrit",
-                        "Events_id" : this.$route.params.id,
-                        "User_id": localStorage.getItem('iduser'),
-                    }
-                }
-            ]
-        })
-        .then(function (response) {
-            _this.checkInscription()
-            _this.UpdateEvent(true)
-        })
-        this.modal = false
-      }
+      if(this.allreadyclick === false){
+        this.allreadyclick = true
+        this.button_text_2 = "Patientez ..."
 
-      //INSCRIPTIONS FILL D'ATTENTE
-      else if(this.currentAction === "Inscription" && this.full === true){
-        await http.post('Inscriptions', 
-        {
-            "records": [
-                {
-                    "fields": {
-                        "Events_name": this.event.fields.Name,
-                        "Adresse_mail": localStorage.getItem('mail'),
-                        "Username": localStorage.getItem('username'),
-                        "Telephone": localStorage.getItem('tel'),
-                        "Statut": "List",
-                        "List_number": this.event.fields.Attente + 1,
-                        "Events_id" : this.$route.params.id,
-                        "User_id": localStorage.getItem('iduser'),
-                    }
-                }
-            ]
-        })
-        .then(function (response) {
-            _this.checkInscription()
-            _this.UpdateEvent(true)
-        })
-        this.modal = false
-      }
+        var _this = this
+        //INSCRIPTIONS
+        if(this.currentAction === "Inscription" && this.full ===false){
+          await http.post('Inscriptions', 
+          {
+              "records": [
+                  {
+                      "fields": {
+                          "Events_name": this.event.fields.Name,
+                          "Adresse_mail": localStorage.getItem('mail'),
+                          "Username": localStorage.getItem('username'),
+                          "Telephone": localStorage.getItem('tel'),
+                          "Statut": "Inscrit",
+                          "Events_id" : this.$route.params.id,
+                          "User_id": localStorage.getItem('iduser'),
+                      }
+                  }
+              ]
+          })
+          .then(function (response) {
+              _this.checkInscription()
+              _this.UpdateEvent(true)
+          })
+          
+        }
 
-      //DESINSCRIPTIONS
-      else if(this.currentAction === "Desinscription"){
-        await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'')
-        .then(function (response) {
-          _this.checkInscription()
-          _this.UpdateEvent(false)
-        })
-        this.modal = false
+        //INSCRIPTIONS FILL D'ATTENTE
+        else if(this.currentAction === "Inscription" && this.full === true){
+          await http.post('Inscriptions', 
+          {
+              "records": [
+                  {
+                      "fields": {
+                          "Events_name": this.event.fields.Name,
+                          "Adresse_mail": localStorage.getItem('mail'),
+                          "Username": localStorage.getItem('username'),
+                          "Telephone": localStorage.getItem('tel'),
+                          "Statut": "List",
+                          "List_number": this.event.fields.Attente + 1,
+                          "Events_id" : this.$route.params.id,
+                          "User_id": localStorage.getItem('iduser'),
+                      }
+                  }
+              ]
+          })
+          .then(function (response) {
+              _this.checkInscription()
+              _this.UpdateEvent(true)
+          })
+        }
+
+        //DESINSCRIPTIONS
+        else if(this.currentAction === "Desinscription"){
+          await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'')
+          .then(function (response) {
+            _this.checkInscription()
+            _this.UpdateEvent(false)
+          })
+        }
       }
-      
     },
 
     async UpdateEvent(action){
@@ -253,6 +257,9 @@ export default {
           _this.event.fields.Attente = new_number
         }) 
       }
+      this.modal = false
+      this.allreadyclick = false
+      this.button_text_2 = "Confirmer"
     }
   }
 }
