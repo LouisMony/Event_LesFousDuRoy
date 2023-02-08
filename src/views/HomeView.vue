@@ -16,6 +16,7 @@
       </div>
       <div v-else class="event_list">
         <EventItem class="event_list_item" v-for="(item, index) in event" :data="item" :key="index" />
+        <div v-if="noresult" class="event_list_noresult">Malheuresement, aucun résultat ne correspond à votre recherche.</div>
       </div>
     </main>
   </div>
@@ -36,6 +37,7 @@ export default {
       active_id : "li_a",
       event: false,
       searchedvalue:'',
+      noresult: false,
     }
   },
 
@@ -44,19 +46,26 @@ export default {
           const events = Array.from(document.querySelectorAll('.event_list_item'))
           if(val !== ''){
               val = val.toLowerCase()
+              var result = false
+
               events.forEach(item => {
                   var name =item.querySelector('#event_name').textContent.toLowerCase();
                   if(name.includes(val)){
                       item.style.display = "flex"
+                      result = true
                   }
                   else{
                       item.style.display = "none"
                   }
               })
+              if(result === false){this.noresult = true}
+              else if(result === true){this.noresult = false}
+
           }else{
               events.forEach(item => {
                   item.style.display = "flex"
               })
+              this.noresult = false
           }
       }
   },
@@ -200,6 +209,17 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 15px;
+
+      .event_list_noresult{
+        text-align: center;
+        margin: 15px auto;
+        font-size: 12px;
+        @media only screen and (min-width: 600px) {
+          margin: 100px auto;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
     }
   }
 }
