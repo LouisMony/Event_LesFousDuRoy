@@ -26,7 +26,8 @@
             </div>
             <div>
               <img src="@/assets/img/people.svg" alt="icône de groupe">
-              <span>{{event.fields.Nombre_inscriptions}}/{{event.fields.Nombre_Participants}}</span>
+              <span v-if="!full">{{event.fields.Nombre_inscriptions}}/{{event.fields.Nombre_Participants}}</span>
+              <span v-else>Complet</span>
             </div>
           </div>
         </div>
@@ -70,7 +71,8 @@ export default {
       full: false,
       date_event:"", 
       allreadyclick: false,
-      button_text_2:"Confirmer"
+      button_text_2:"Confirmer",
+      inscrit: false
     }
   },
   mounted(){
@@ -81,8 +83,9 @@ export default {
       var _this = this
       await http.get('Evenements/'+this.page_id)
       .then(function (response) {
+        console.log(response.data)
         _this.event = response.data
-        if(_this.event.fields.Nombre_inscriptions === _this.event.fields.Nombre_Participants){
+        if(_this.event.fields.is_full === "true"){
           _this.full = true
         }
         _this.RewriteDate()
@@ -120,6 +123,7 @@ export default {
           _this.warning_text = "Êtes-vous sûre ? Cette action n'est pas annulable, si cet évènement est complet, une personne de la file d’attente vous remplacera automatiquement."
           _this.button_text = "Me désinscrire de cet évènement"
           _this.currentAction = "Desinscription"
+          _this.inscrit = true
         }
         else{
           
@@ -131,11 +135,13 @@ export default {
               _this.warning_text = "Êtes-vous sûre ? Cette action n'est pas annulable, en sortant de la file d'attente vous perdrez votre position dans cette dernière. "
               _this.button_text = "Sortir de la file d'attente"
               _this.currentAction = "Desinscription"
+              _this.inscrit = false
             }
             else{
               _this.currentAction = "Inscription"
               _this.second_class = false
               _this.warning_text = "Il sera toujours possible de vous désinscrire par la suite."
+              _this.inscrit = false
               if(_this.full === false){
                 _this.button_text = "M’inscrire à cet évènement"
 
@@ -177,6 +183,7 @@ export default {
           .then(function (response) {
               _this.checkInscription()
               _this.UpdateEvent(true)
+              _this.getDetail()
           })
           
         }
@@ -203,6 +210,7 @@ export default {
           .then(function (response) {
               _this.checkInscription()
               _this.UpdateEvent(true)
+              _this.getDetail()
           })
         }
 
@@ -212,6 +220,7 @@ export default {
           .then(function (response) {
             _this.checkInscription()
             _this.UpdateEvent(false)
+            _this.getDetail()
           })
         }
       }
@@ -219,12 +228,43 @@ export default {
 
     async UpdateEvent(action){
       var _this = this
-      if(action === true && this.full === false){var new_number = this.event.fields.Nombre_inscriptions + 1}
-      else if(action === true && this.full === true){var new_number = this.event.fields.Attente + 1}
-      else if(action === false && this.full === false){var new_number = this.event.fields.Nombre_inscriptions - 1}
-      else if(action === false && this.full === true){var new_number = this.event.fields.Attente - 1}
+      let future_full = "false"
+      if(action === true && this.full === false){
+        var new_number = this.event.fields.Nombre_inscriptions + 1
+      }
+      else if(action === true && this.full === true){
+        var new_number = this.event.fields.Attente + 1
+      }
+      else if(action === false && this.full === false){
+        var new_number = this.event.fields.Nombre_inscriptions - 1
+      }
+      else if(action === false && this.full === true){
+        var new_number = this.event.fields.Attente - 1
+      }
 
-      if(this.full === false){
+      if(this.full === false && action === true){
+        if(new_number === this.event.fields.Nombre_Participants){
+          future_full = "true"
+        }
+
+        await http.patch('Evenements', 
+        {
+            "records": [
+                {
+                    "id": this.page_id,
+                    "fields": {
+                        "Nombre_inscriptions": new_number,
+                        "is_full" : future_full
+                    }
+                }
+            ]
+        })
+        .then(function (response) {
+          _this.event.fields.Nombre_inscriptions = new_number
+        })   
+      }
+
+      else if(this.full === false && action === false){
         await http.patch('Evenements', 
         {
             "records": [
@@ -237,11 +277,11 @@ export default {
             ]
         })
         .then(function (response) {
-          _this.event.fields.Nombre_inscriptions = new_number
-        })   
+          _this.event.fields.Attente = new_number
+        }) 
       }
       
-      else if(this.full === true){
+      else if(this.full === true && action === true){
         await http.patch('Evenements', 
         {
             "records": [
@@ -249,6 +289,7 @@ export default {
                     "id": this.page_id,
                     "fields": {
                         "Attente": new_number,
+                        "is_full" : "true"
                     }
                 }
             ]
@@ -256,6 +297,43 @@ export default {
         .then(function (response) {
           _this.event.fields.Attente = new_number
         }) 
+      }
+      else if(this.full === true && action === false){
+        if(this.inscrit === true){
+          await http.patch('Evenements', 
+          {
+              "records": [
+                  {
+                      "id": this.page_id,
+                      "fields": {
+                          "Nombre_inscriptions": new_number,
+                          "is_full" : "true"
+                      }
+                  }
+              ]
+          })
+          .then(function (response) {
+            _this.event.fields.Attente = new_number
+          }) 
+        }
+        else{
+          await http.patch('Evenements', 
+          {
+              "records": [
+                  {
+                      "id": this.page_id,
+                      "fields": {
+                          "Attente": new_number,
+                          "is_full" : "true"
+                      }
+                  }
+              ]
+          })
+          .then(function (response) {
+            _this.event.fields.Attente = new_number
+          }) 
+        }
+        
       }
       this.modal = false
       this.allreadyclick = false
