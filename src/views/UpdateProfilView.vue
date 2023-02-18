@@ -75,7 +75,7 @@ export default {
                         }
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        //console.log(error);
                     });
                 }
                 else{
@@ -85,7 +85,7 @@ export default {
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                //console.log(error);
             });
         }
         else{
@@ -96,7 +96,7 @@ export default {
     },
     async UpdateUser(){
       var _this = this
-      console.log('user');
+      //console.log('user');
       await http.patch('Users', 
         {
             "records": [
@@ -112,7 +112,7 @@ export default {
             ]
         })
         .then(function (response) {
-          console.log(response.data)
+          //console.log(response.data)
           localStorage.setItem('username', _this.username)
           localStorage.setItem('mail', _this.mail)
           localStorage.setItem('tel', _this.tel)

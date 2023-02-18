@@ -77,7 +77,7 @@ export default {
             ]
         })
         .then(function (response) {
-            console.log(response.data)
+            //console.log(response.data)
             localStorage.setItem('photo', _this.selectedphoto)
             _this.$router.push('/options')
         })   

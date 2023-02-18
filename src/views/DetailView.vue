@@ -85,9 +85,6 @@ export default {
       .then(function (response) {
         console.log(response.data)
         _this.event = response.data
-        if(_this.event.fields.is_full === "true"){
-          _this.full = true
-        }
         _this.RewriteDate()
         _this.checkInscription()
       })
@@ -157,13 +154,14 @@ export default {
     },
 
     async Action(){
+      console.log('Attente : '+ this.event.fields.Attente);
       if(this.allreadyclick === false){
         this.allreadyclick = true
         this.button_text_2 = "Patientez ..."
 
         var _this = this
         //INSCRIPTIONS
-        if(this.currentAction === "Inscription" && this.full ===false){
+        if(this.currentAction === "Inscription" && this.event.fields.is_full === 'false'){
           await http.post('Inscriptions', 
           {
               "records": [
@@ -181,15 +179,16 @@ export default {
               ]
           })
           .then(function (response) {
-              _this.checkInscription()
               _this.UpdateEvent(true)
+              _this.checkInscription()
               _this.getDetail()
           })
           
         }
 
         //INSCRIPTIONS FILL D'ATTENTE
-        else if(this.currentAction === "Inscription" && this.full === true){
+        else if(this.currentAction === "Inscription" && this.event.fields.is_full === 'true'){
+          
           await http.post('Inscriptions', 
           {
               "records": [
@@ -208,8 +207,8 @@ export default {
               ]
           })
           .then(function (response) {
-              _this.checkInscription()
               _this.UpdateEvent(true)
+              _this.checkInscription()
               _this.getDetail()
           })
         }
@@ -218,8 +217,8 @@ export default {
         else if(this.currentAction === "Desinscription"){
           await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'')
           .then(function (response) {
-            _this.checkInscription()
             _this.UpdateEvent(false)
+            _this.checkInscription()
             _this.getDetail()
           })
         }
@@ -229,20 +228,30 @@ export default {
     async UpdateEvent(action){
       var _this = this
       let future_full = "false"
-      if(action === true && this.full === false){
+      //INSCRIPTION & PAS FULL
+      if(action === true && this.event.fields.is_full === 'false'){
         var new_number = this.event.fields.Nombre_inscriptions + 1
       }
-      else if(action === true && this.full === true){
+      //INSCRIPTION & FULL
+      else if(action === true && this.event.fields.is_full === 'true'){
+        console.log(this.event.fields.Attente);
         var new_number = this.event.fields.Attente + 1
       }
-      else if(action === false && this.full === false){
+      //DESINSCRIPTION & PAS FULL
+      else if(action === false && this.event.fields.is_full === 'false'){
         var new_number = this.event.fields.Nombre_inscriptions - 1
       }
-      else if(action === false && this.full === true){
-        var new_number = this.event.fields.Attente - 1
+      //DESINSCRIPTION & FULL
+      else if(action === false && this.event.fields.is_full === 'true'){
+        if(this.inscrit === true){
+          var new_number = this.event.fields.Nombre_inscriptions - 1
+        }
+        else{
+          var new_number = this.event.fields.Attente - 1
+        }
       }
 
-      if(this.full === false && action === true){
+      if(this.event.fields.is_full === 'false' && action === true){
         if(new_number === this.event.fields.Nombre_Participants){
           future_full = "true"
         }
@@ -264,7 +273,7 @@ export default {
         })   
       }
 
-      else if(this.full === false && action === false){
+      else if(this.event.fields.is_full === 'false' && action === false){
         await http.patch('Evenements', 
         {
             "records": [
@@ -281,7 +290,7 @@ export default {
         }) 
       }
       
-      else if(this.full === true && action === true){
+      else if(this.event.fields.is_full === 'true' && action === true){
         await http.patch('Evenements', 
         {
             "records": [
@@ -298,7 +307,7 @@ export default {
           _this.event.fields.Attente = new_number
         }) 
       }
-      else if(this.full === true && action === false){
+      else if(this.event.fields.is_full === 'true' && action === false){
         if(this.inscrit === true){
           await http.patch('Evenements', 
           {
