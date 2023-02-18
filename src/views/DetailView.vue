@@ -26,15 +26,15 @@
             </div>
             <div>
               <img src="@/assets/img/people.svg" alt="icône de groupe">
-              <span v-if="!full">{{event.fields.Nombre_inscriptions}}/{{event.fields.Nombre_Participants}}</span>
-              <span v-else>Complet</span>
+              <span v-if="event.fields.is_full === 'true'">Complet</span>
+              <span v-else>{{event.fields.Nombre_inscriptions}}/{{event.fields.Nombre_Participants}}</span>
             </div>
           </div>
         </div>
         <p><span>Details :</span><br>Prix d'entrée : {{event.fields.Prix}} € <br>{{event.fields.Remarque}}</p>
       </div>
       <div class="detail_content_bottom">
-        <p v-if="full">
+        <p v-if="event.fields.is_full === 'true'">
           Cet événement est actuellement complet, vous pouvez cependant vous inscrire dans la file d'attente : en cas de désistement d'un participant vous pourriez être recontacter par notre équipe pour pouvoir participer.
           </p>
         <button v-bind:class="{ scnd_state: second_class }" class="main_button" @click="modal=true">{{button_text}}</button>
