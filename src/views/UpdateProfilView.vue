@@ -17,12 +17,6 @@
 
         <label for="tel">Numéro de téléphone</label><br>
         <input type="text" name="tel" v-model="tel" required/><br>
-
-        <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" v-model="password" required/><br>
-
-        <label for="password_conf">Confirmer le mot de passe</label><br>
-        <input type="password" name="password_conf" v-model="passwordconf" required/><br>
         
         <span class="error" v-if="modal_error">{{error_content}}</span><br>
 
@@ -59,40 +53,33 @@ export default {
     async Verif(){
         this.button_state = "Patientez..."
         var _this = this
-        if(this.password === this.passwordconf){
-            await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
-            .then(function (response) {
-                if(response.data.records.length === 0 || ( response.data.records.length === 1 && response.data.records[0].id === localStorage.getItem('iduser')) ){
-                    http.get('Users?filterByFormula=AND(SEARCH("'+_this.tel+'", {Telephone}))')
-                    .then(function (response) {
-                        if(response.data.records.length === 0 || ( response.data.records.length === 1 && response.data.records[0].id === localStorage.getItem('iduser'))){ 
-                            _this.UpdateUser()
-                        }
-                        else{
-                            _this.error_content = "Ce numéro de téléphone est déja utilisé."
-                            _this.modal_error = true
-                            _this.button_state = "Modifier mon profil"
-                        }
-                    })
-                    .catch(function (error) {
-                        //console.log(error);
-                    });
-                }
-                else{
-                    _this.error_content = "Cette adresse email est déja utilisée."
-                    _this.modal_error = true
-                    _this.button_state = "Modifier mon profil"
-                }
-            })
-            .catch(function (error) {
-                //console.log(error);
-            });
-        }
-        else{
-          _this.error_content = "Les deux mots de passe ne sont pas identiques"
-          _this.modal_error = true
-          _this.button_state = "Modifier mon profil" 
-        }
+        await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
+        .then(function (response) {
+            if(response.data.records.length === 0 || ( response.data.records.length === 1 && response.data.records[0].id === localStorage.getItem('iduser')) ){
+                http.get('Users?filterByFormula=AND(SEARCH("'+_this.tel+'", {Telephone}))')
+                .then(function (response) {
+                    if(response.data.records.length === 0 || ( response.data.records.length === 1 && response.data.records[0].id === localStorage.getItem('iduser'))){ 
+                        _this.UpdateUser()
+                    }
+                    else{
+                        _this.error_content = "Ce numéro de téléphone est déja utilisé."
+                        _this.modal_error = true
+                        _this.button_state = "Modifier mon profil"
+                    }
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
+            }
+            else{
+                _this.error_content = "Cette adresse email est déja utilisée."
+                _this.modal_error = true
+                _this.button_state = "Modifier mon profil"
+            }
+        })
+        .catch(function (error) {
+            //console.log(error);
+        }); 
     },
     async UpdateUser(){
       var _this = this

@@ -96,7 +96,7 @@ export default {
         this.event = response.data.records
       })
       .catch((error)=> {
-        console.log(error);
+        //console.log(error);
       });
     },
     

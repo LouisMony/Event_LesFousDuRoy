@@ -18,9 +18,15 @@
         <label for="password_conf">Confirmer le mot de passe</label><br>
         <input type="password" name="password_conf" v-model="passwordconf" required/><br>
 
+        <div class="rgpd">
+            <input type="checkbox" name="rgpd_conf" required/>
+            <label for="rgpd_conf">J'accepte que les gérants des Fous du Roy traitent les données recueillies pour l’organisation des évènements. Pour en savoir plus sur la gestion de vos données personnelles et pour exercer vos droits, reportez-vous à la notice <router-link class="redirect" to="utilisation-des-donnees">ci-jointe.</router-link></label><br>
+        </div>
+        
+
         <span class="error" v-if="modal_error">{{error_content}}</span><br>
 
-        <button class="main_button">{{button_state}}</button>
+        <button class="main_button">{{button_state}}</button><br/><br/>
 
         <router-link class="redirect" to="me-connecter">J'ai déja un compte.</router-link>
     </form>
@@ -96,7 +102,7 @@ export default {
                         }
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        //console.log(error);
                     });
                 }
                 else{
@@ -106,7 +112,7 @@ export default {
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                //console.log(error);
             });
         }
         else{
@@ -132,7 +138,7 @@ export default {
             ]
         })
         .then(function (response) {
-            console.log(response.data)
+            //console.log(response.data)
             localStorage.setItem('state', 'ACTIVE')
             localStorage.setItem('username', _this.username)
             localStorage.setItem('mail', _this.mail)
@@ -143,7 +149,7 @@ export default {
             _this.button_state = "Créer mon compte"
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
     }
   } 
@@ -171,6 +177,18 @@ export default {
     }
 
     form{
+
+        .rgpd{
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            label{
+                font-size: 10px!important;
+            }
+            input{
+                width: 70px;
+            }
+        }
         .error{
             color: $rouge;
             font-size: 12px;

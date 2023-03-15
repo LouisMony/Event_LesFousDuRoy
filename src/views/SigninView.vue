@@ -51,14 +51,14 @@ export default {
             _this.$router.push('/')
            }
            else{
-            console.log('not connected')
+            //console.log('not connected')
             _this.modal_error = true
             _this.mail = ""
             _this.password = ""
            }
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
     }
   } 
