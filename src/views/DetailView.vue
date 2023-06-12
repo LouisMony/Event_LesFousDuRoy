@@ -112,7 +112,7 @@ export default {
 
     async checkInscription(){
       var _this = this
-      await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'",{Statut}="Inscrit" )')
+      await http.get('Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+this.page_id+'",{Statut}="Inscrit" )')
       .then(async function (response) {      
         if (response.data.records.length === 1) {
           _this.incriptionId = response.data.records[0].id
@@ -124,7 +124,7 @@ export default {
         }
         else{
           
-          await http.get('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+_this.page_id+'",{Statut}="List")')
+          await http.get('Inscriptions?filterByFormula=AND({Adresse_mail}="'+localStorage.getItem("mail")+'",{Events_id}="'+_this.page_id+'",{Statut}="List")')
           .then(function (response) { 
             if (response.data.records.length === 1) {
               _this.incriptionId = response.data.records[0].id
@@ -215,7 +215,7 @@ export default {
 
         //DESINSCRIPTIONS
         else if(this.currentAction === "Desinscription"){
-          await http.delete('https://api.airtable.com/v0/appIikQa2F0vLZo8R/Inscriptions/'+this.incriptionId+'')
+          await http.delete('Inscriptions/'+this.incriptionId+'')
           .then(function (response) {
             _this.UpdateEvent(false)
             _this.checkInscription()
