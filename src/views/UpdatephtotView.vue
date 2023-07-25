@@ -15,7 +15,8 @@
             </div>
         </div>
         
-        <button class="main_button" v-on:click="updatePhoto()">{{text_button}}</button>
+        <button v-if="!disableButton" class="main_button" v-on:click="updatePhoto()">{{text_button}}</button>
+        <button v-else class="main_button button_disabled" >Selectionner une photo</button>
     </div>
   </div>
 </template>
@@ -31,7 +32,8 @@ export default {
     return {
         images: [],
         selectedphoto: localStorage.getItem('photo'),
-        text_button: "Sauvegarder"
+        text_button: "Sauvegarder",
+        disableButton: true
     }
   },
   mounted(){
@@ -49,6 +51,7 @@ export default {
     },
 
     selectPhoto(url, id_div){
+        this.disableButton = false
         this.selectedphoto = url.slice(16)
 
         const options = Array.from(document.querySelectorAll('.photo_list_item'))
@@ -88,6 +91,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 @import "@/assets/style/_variables.scss";
 
 .updatephoto{
@@ -141,6 +145,7 @@ export default {
 
                 img{
                     height: 100%;
+                    cursor: pointer;
                 }
             }
 
@@ -170,6 +175,11 @@ export default {
             width: 100%;
             height: 55px;
             margin: 25px 0 0px 0;
+        }
+
+        .button_disabled{
+            filter: brightness(70%);
+            cursor: default;
         }
     }
 }
