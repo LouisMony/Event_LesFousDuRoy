@@ -35,6 +35,7 @@
 
 <script>
 import {http} from "../assets/js/http-common.js"
+import bcrypt from 'bcryptjs';
 
 export default {
   name: 'Signup',
@@ -57,17 +58,7 @@ export default {
     this.countFile(require.context('@/assets/img/photo_profil/', true, /\.png$/))
   },
   methods:{
-    // SelectPhoto(str){
-    //     const options = Array.from(document.querySelectorAll('.photo_list_item'))
-    //     options.forEach(item => {
-    //         if(item.id === "photo_list_item_"+str){
-    //             item.classList.add('active')
-    //         }
-    //         else{
-    //             item.classList.remove('active')
-    //         }
-    //     })
-    // },
+
     countFile(r){
         var id = 0
         r.keys().forEach(key => {
@@ -123,12 +114,17 @@ export default {
     async AddUser(){
         var _this = this
         var photo = this.getRandomItem(this.images);
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(this.password, salt);
+        console.log("hashedPassword : ", hashedPassword);
+
         await http.post('Users', 
         {
             "records": [
                 {
                     "fields": {
-                        "Password": this.password,
+                        "Password": hashedPassword,
                         "Adresse_mail": this.mail,
                         "Username": this.username,
                         "Telephone": this.tel,

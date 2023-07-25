@@ -90,7 +90,6 @@ export default {
                 {
                     "id": localStorage.getItem('iduser'),
                     "fields": {
-                        "Password": this.password,
                         "Adresse_mail": this.mail,
                         "Username": this.username,
                         "Telephone": this.tel

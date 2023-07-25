@@ -24,6 +24,7 @@
 
 <script>
 import {http} from "../assets/js/http-common.js"
+import bcrypt from 'bcryptjs';
 
 export default {
   name: 'Signin',
@@ -41,25 +42,33 @@ export default {
         var _this = this
         await http.get('Users?filterByFormula=AND(SEARCH("'+this.mail+'", {Adresse_mail}))')
         .then(function (response) {
-           if (response.data.records[0].fields.Password === _this.password){
+            _this.LogUser(response)
+        })
+        .catch(function (error) {
+            //console.log(error);
+        });
+    },
+
+    async LogUser(response){
+        console.log(response.data.records[0].fields.Password);
+        console.log(this.password);
+        const isPasswordValid = await bcrypt.compare(this.password, response.data.records[0].fields.Password);
+        console.log('isPasswordValid : ',isPasswordValid);
+        if (isPasswordValid){
             localStorage.setItem('state', 'ACTIVE')
             localStorage.setItem('username', response.data.records[0].fields.Username)
             localStorage.setItem('mail', response.data.records[0].fields.Adresse_mail)
             localStorage.setItem('tel', response.data.records[0].fields.Telephone)
             localStorage.setItem('photo', response.data.records[0].fields.Photo_Profil)
             localStorage.setItem('iduser', response.data.records[0].id)
-            _this.$router.push('/')
-           }
-           else{
+            this.$router.push('/')
+        }
+        else{
             //console.log('not connected')
-            _this.modal_error = true
-            _this.mail = ""
-            _this.password = ""
-           }
-        })
-        .catch(function (error) {
-            //console.log(error);
-        });
+            this.modal_error = true
+            this.mail = ""
+            this.password = ""
+        }
     }
   } 
 }
