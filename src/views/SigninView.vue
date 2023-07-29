@@ -45,15 +45,12 @@ export default {
             _this.LogUser(response)
         })
         .catch(function (error) {
-            //console.log(error);
+
         });
     },
 
     async LogUser(response){
-        console.log(response.data.records[0].fields.Password);
-        console.log(this.password);
         const isPasswordValid = await bcrypt.compare(this.password, response.data.records[0].fields.Password);
-        console.log('isPasswordValid : ',isPasswordValid);
         if (isPasswordValid){
             localStorage.setItem('state', 'ACTIVE')
             localStorage.setItem('username', response.data.records[0].fields.Username)
@@ -64,7 +61,6 @@ export default {
             this.$router.push('/')
         }
         else{
-            //console.log('not connected')
             this.modal_error = true
             this.mail = ""
             this.password = ""
