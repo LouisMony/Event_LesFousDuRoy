@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Maintenance />
     <NavbarDesktop class="hideOnMobile" v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
     <transition v-if="mobile" name="slide" mode="out-in">
       <router-view/>
@@ -13,11 +14,13 @@
 
 import Navbar from '@/components/Navbar.vue'
 import NavbarDesktop from '@/components/Navbar_Desktop.vue'
+import Maintenance from './components/Maintenance.vue'
 
 export default {
   components: {
     Navbar,
-    NavbarDesktop
+    NavbarDesktop,
+    Maintenance
   },
   data(){
     return {
