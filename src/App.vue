@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Maintenance />
+    <!-- <Maintenance /> -->
     <NavbarDesktop class="hideOnMobile" v-if="this.$route.name === 'home' || this.$route.name === 'my-profil' || this.$route.name === 'options'"  />
     <transition v-if="mobile" name="slide" mode="out-in">
       <router-view/>

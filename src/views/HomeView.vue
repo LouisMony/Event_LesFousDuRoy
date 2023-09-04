@@ -8,13 +8,16 @@
       <ul class="filter">
         <li id="li_start">Filtrer par : </li>
         <li id="li_a" class="filter_li active" v-on:click="toogleActive('li_a'); filterby('Date', 'asc')">Date</li>
-        <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b'); filterby('Select' , 'desc')">Thème</li>
+        <li id="li_b" class="filter_li" v-on:click="toogleActive('li_b'); filterby('Select' , 'asc')">Thème</li>
         <li id="li_c" class="filter_li" v-on:click="toogleActive('li_c'); filterby('Nombre_inscriptions', 'asc')">Places</li>
       </ul>
       <div v-if="event === false" class="loading">
         <div class="lds-dual-ring"></div>
       </div>
       <div v-else class="event_list">
+        <!-- <div v-for="(item, index) in event" :key="index">
+          {{ item.fields.Name }} / {{ item.fields.Date }} / {{ item.fields.Select }} / {{ item.fields.Nombre_inscriptions }}
+        </div> -->
         <EventItem class="event_list_item" v-for="(item, index) in event" :data="item" :key="index" />
         <div v-if="noresult" class="event_list_noresult">Malheuresement, aucun résultat ne correspond à votre recherche.</div>
       </div>
@@ -73,6 +76,7 @@ export default {
   mounted(){
     this.filterby("Date", "asc")
   },
+
   methods:{
     toogleActive(id){
       if(id !== this.active_id){
@@ -90,9 +94,11 @@ export default {
     },
 
     async filterby(param, sens){
-
+      this.event = false
+      //console.log(param, sens);
       await http.get('Evenements?sort%5B0%5D%5Bfield%5D='+param+'&sort%5B0%5D%5Bdirection%5D='+sens+'')
       .then((response) => {
+        //console.log(response)
         this.event = response.data.records
       })
       .catch((error)=> {
